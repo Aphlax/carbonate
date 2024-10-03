@@ -1,0 +1,72 @@
+:host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.back-button {
+  margin: 16px;
+  align-self: start;
+}
+
+label {
+  margin: 56px 0 10px;
+  text-transform: uppercase;
+}
+
+.life {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  button {
+    font-size: 30px;
+  }
+}
+
+.players {
+  display: grid;
+  grid-template: 1fr 1fr / 1fr 1fr 1fr;
+}
+
+button {
+  position: relative;
+  margin: 16px;
+  padding: 0;
+  width: 64px;
+  height: 64px;
+  border: 2px solid #90C462;
+  border-radius: 8px;
+  background-color: transparent;
+  transition: color 150ms;
+  color: #90C462;
+}
+button.selected {
+  color: black;
+}
+
+button:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  left: 50%;
+  right: 50%;
+  z-index: -1;
+  border-radius: 100%;
+  background-color: #90C462;
+  transition: all 150ms;
+}
+button.selected:before {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #90C462;
+  border-radius: 4px;
+}
+
+.continue {
+  margin-top: 40px;
+}

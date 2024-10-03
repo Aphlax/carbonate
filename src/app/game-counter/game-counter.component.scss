@@ -1,0 +1,142 @@
+
+
+:host {
+  display: flex;
+}
+
+.rotatable-container {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+:host.up .rotatable-container {
+  transform: rotate(180deg);
+}
+:host.left .rotatable-container {
+  flex-direction: column;
+}
+:host.right .rotatable-container {
+  flex-direction: column-reverse;
+}
+
+.counter {
+  flex: 1;
+  position: relative;
+
+  display: grid;
+  grid: 2fr 6fr 1fr 1fr / 1fr 6fr 1fr;
+  grid-template-areas:
+    ". . ."
+    ". value ."
+    ". icon ."
+    ". . .";
+
+  border-radius: 20px;
+  overflow: hidden;
+}
+:host.left .counter {
+  grid: 1fr 6fr 1fr / 1fr 1fr 6fr 2fr;
+  grid-template-areas:
+    ". . . ."
+    ". icon value ."
+    ". . . .";
+}
+:host.right .counter {
+  grid: 1fr 6fr 1fr / 2fr 6fr 1fr 1fr;
+  grid-template-areas:
+    ". . . ."
+    ". value icon ."
+    ". . . .";
+}
+
+.value {
+  grid-area: value;
+  place-self: stretch;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+
+  span {
+    line-height: 100%;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+      Helvetica, "Arial Narrow", Arial, "Lucida Grande", sans-serif;
+    font-weight: 400;
+  }
+}
+:host.left .value {
+  writing-mode: vertical-rl;
+}
+:host.right .value {
+  transform: rotate(180deg);
+  writing-mode: vertical-rl;
+}
+
+.icon {
+  grid-area: icon;
+  justify-self: center;
+  align-self: stretch;
+}
+:host.left .icon {
+  transform: rotate(90deg);
+  justify-self: stretch;
+  align-self: center;
+}
+:host.right .icon {
+  transform: rotate(270deg);
+  justify-self: stretch;
+  align-self: center;
+}
+
+.increase-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 50%;
+}
+:host.left .increase-button {
+  bottom: 0;
+  left: 50%;
+}
+:host.right .increase-button {
+  bottom: 0;
+  right: 50%;
+}
+
+.decrease-button {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+:host.left .decrease-button {
+  top: 0;
+  right: 50%;
+}
+:host.right .decrease-button {
+  top: 0;
+  left: 50%;
+}
+
+:host.up .increase-button, :host.up .decrease-button {
+  transform: rotate(180deg);
+}
+
+$colorW: #FFFFFF; // White
+$colorP: #D44063; // Purple
+$colorR: #E15950; // Red
+$colorO: #ED7743; // Orange
+$colorA: #F1A14B; // Apricot
+$colorY: #F7CF54; // Yellow
+$colorL: #90C462; // Lime
+$colorG: #57BD7B; // Green
+$colorT: #4C9F9C; // Turquoise
+$colorU: #4880C0; // U Blue
+$colorD: #5C6BB3; // Denim
+$colorV: #7857A6; // Violet
+

@@ -1,0 +1,62 @@
+:host {
+  display: grid;
+  flex: 1;
+}
+
+:host.n-1 {
+  grid: 10% 90% / 1fr;
+  grid-template-areas:
+    "."
+    "p0";
+}
+:host.n-2 {
+  grid: 50% 50% / 1fr;
+  grid-template-areas:
+    "p0"
+    "p1";
+}
+:host.n-3 {
+  grid: 62% 38% / 50% 50%;
+  grid-template-areas:
+    "p0 p1"
+    "p2 p2";
+}
+:host.n-4 {
+  grid: 50% 50% / 50% 50%;
+  grid-template-areas:
+    "p0 p1"
+    "p2 p3";
+}
+:host.n-5 {
+  grid: 37.5% 37.5% 25% / 50% 50%;
+  grid-template-areas:
+    "p0 p1"
+    "p2 p3"
+    "p4 p4";
+}
+:host.n-6 {
+  grid: 33.33% 33.33% 33.33% / 50% 50%;
+  grid-template-areas:
+    "p0 p1"
+    "p2 p3"
+    "p4 p5";
+}
+
+game-counter.p-0 {
+  grid-area: p0;
+}
+game-counter.p-1 {
+  grid-area: p1;
+}
+game-counter.p-2 {
+  grid-area: p2;
+}
+game-counter.p-3 {
+  grid-area: p3;
+}
+game-counter.p-4 {
+  grid-area: p4;
+}
+game-counter.p-5 {
+  grid-area: p5;
+}

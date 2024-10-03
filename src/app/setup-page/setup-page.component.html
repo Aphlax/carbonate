@@ -1,0 +1,61 @@
+<a class="back-button" mat-icon-button aria-label="Back" routerLink="/">
+  <mat-icon>arrow_back</mat-icon>
+</a>
+
+<label>Set players</label>
+<div class="players">
+  <button (click)="players = 1;" [ngClass]="{selected: players == 1}">
+    <svg fill="currentColor" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="10"></circle>
+    </svg>
+  </button>
+  <button (click)="players = 2;" [ngClass]="{selected: players == 2}">
+    <svg fill="currentColor" viewBox="0 0 100 100">
+      <circle cx="23" cy="23" r="10"></circle>
+      <circle cx="77" cy="77" r="10"></circle>
+    </svg>
+  </button>
+  <button (click)="players = 3;" [ngClass]="{selected: players == 3}">
+    <svg fill="currentColor" viewBox="0 0 100 100">
+      <circle cx="23" cy="23" r="10"></circle>
+      <circle cx="50" cy="50" r="10"></circle>
+      <circle cx="77" cy="77" r="10"></circle>
+    </svg>
+  </button>
+  <button (click)="players = 4;" [ngClass]="{selected: players == 4}">
+    <svg fill="currentColor" viewBox="0 0 100 100">
+      <circle cx="23" cy="23" r="10"></circle>
+      <circle cx="23" cy="77" r="10"></circle>
+      <circle cx="77" cy="23" r="10"></circle>
+      <circle cx="77" cy="77" r="10"></circle>
+    </svg>
+  </button>
+  <button (click)="players = 5;" [ngClass]="{selected: players == 5}">
+    <svg fill="currentColor" viewBox="0 0 100 100">
+      <circle cx="23" cy="23" r="10"></circle>
+      <circle cx="23" cy="77" r="10"></circle>
+      <circle cx="50" cy="50" r="10"></circle>
+      <circle cx="77" cy="23" r="10"></circle>
+      <circle cx="77" cy="77" r="10"></circle>
+    </svg>
+  </button>
+  <button (click)="players = 6;" [ngClass]="{selected: players == 6}">
+    <svg fill="currentColor" viewBox="0 0 100 100">
+      <circle cx="23" cy="23" r="10"></circle>
+      <circle cx="23" cy="77" r="10"></circle>
+      <circle cx="23" cy="50" r="10"></circle>
+      <circle cx="77" cy="50" r="10"></circle>
+      <circle cx="77" cy="23" r="10"></circle>
+      <circle cx="77" cy="77" r="10"></circle>
+    </svg>
+  </button>
+</div>
+
+<label>Starting life</label>
+<div class="life">
+  <button (click)="life = 20;" [ngClass]="{selected: life == 20}">20</button>
+  <button (click)="life = 30;" [ngClass]="{selected: life == 30}">30</button>
+  <button (click)="life = 40;" [ngClass]="{selected: life == 40}">40</button>
+</div>
+<a class="continue" routerLink="/game" [fragment]="gameHash" *ngIf="players == 1" mat-flat-button>Play</a>
+<a class="continue" routerLink="/roll" fragment="{{players}}:{{life}}" *ngIf="players != 1" mat-flat-button>Next</a>

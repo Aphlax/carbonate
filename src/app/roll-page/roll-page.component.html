@@ -1,0 +1,6 @@
+<canvas></canvas>
+
+<a class="back-button" mat-icon-button aria-label="Back" routerLink="/setup" fragment="{{players}}:{{life}}">
+  <mat-icon>arrow_back</mat-icon>
+</a>
+<a class="continue" routerLink="/game" [fragment]="gameHash" mat-flat-button>Skip</a>
