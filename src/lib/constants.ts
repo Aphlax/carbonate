@@ -38,3 +38,27 @@ export const PLAYER_PARSE_REGEX =
   new RegExp(`([${allColors}])([-]?\\d+)([${allIcons}0-9-]*)`, "g");
 export const ICONS_PARSE_REGEX =
   new RegExp(`([${allIcons}])([-]?\\d+)`, "g");
+
+export function createHash(players: Player[], startingLifeTotal: number): string {
+  return players.map(pl =>
+    pl.color + pl.counters[0].value + pl.counters.slice(1).map(c => c.icon + c.value).join())
+    .join() + HASH_SEPARATOR + startingLifeTotal;
+}
+
+export function parseHash(hash: string): { players: Player[], startingLifeTotal: number } {
+  const match = hash.match(HASH_PARSE_REGEX);
+  if (!match) return {players: [], startingLifeTotal: 0};
+  const [_, playersHash, startingLifeTotalHash] = match;
+  const startingLifeTotal = startingLifeTotalHash ? parseInt(startingLifeTotalHash) : 0;
+
+  const players = [];
+  for (let [_, color, value, icons] of playersHash.matchAll(PLAYER_PARSE_REGEX)) {
+    const counters = [];
+    for (let [_, icon, value] of icons.matchAll(ICONS_PARSE_REGEX)) {
+      counters.push({icon, value: parseInt(value)});
+    }
+    players.push({color, counters: [{icon: "", value: parseInt(value)}, ...counters]});
+  }
+
+  return {players, startingLifeTotal};
+}

@@ -1,2 +1,46 @@
 <game-counter *ngFor="let player of players; index as i" class="p-{{i}} {{getOrientation(i)}}" [player]="player">
 </game-counter>
+<button class="menu-button" (click)="showMenu = true;" matRipple [matRippleCentered]="true">
+  <icon icon="carbonate"></icon>
+</button>
+<div class="menu-scrim" [ngClass]="{show: showMenu}">
+  <button mat-icon-button aria-label="close" (click)="showMenu = false;">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <button class="menu-action share" (click)="showShare = true;" matRipple>
+    <icon icon="share"></icon>
+    <label>share</label>
+  </button>
+  <button class="menu-action reset" (click)="reset(); showMenu = false;" matRipple>
+    <icon icon="reset"></icon>
+    <label>reset</label>
+  </button>
+  <button class="menu-action history" (click)="showHistory = true;" matRipple>
+    <icon icon="history" style="transform: scale(0.9)"></icon>
+    <label>history</label>
+  </button>
+  <button class="menu-action dice" (click)="showDice = true;" matRipple>
+    <icon icon="dice"></icon>
+    <label>dice</label>
+  </button>
+  <a class="exit-button" mat-stroked-button routerLink="/">Exit</a>
+</div>
+<div class="menu-scrim history" [ngClass]="{show: showHistory}">
+  <button mat-icon-button aria-label="close" (click)="showHistory = false; showMenu = false;">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h2 class="menu-title">History</h2>
+</div>
+<div class="menu-scrim dice" [ngClass]="{show: showDice}">
+  <button mat-icon-button aria-label="close" (click)="showDice = false; showMenu = false;">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h2 class="menu-title">Dice</h2>
+
+</div>
+<div class="menu-scrim share" [ngClass]="{show: showShare}">
+  <button mat-icon-button aria-label="close" (click)="showShare = false; showMenu = false;">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h2 class="menu-title">Share</h2>
+</div>

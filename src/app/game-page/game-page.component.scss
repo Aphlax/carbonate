@@ -5,58 +5,175 @@
 
 :host.n-1 {
   grid: 10% 90% / 1fr;
-  grid-template-areas:
-    "."
-    "p0";
+  grid-template-areas: "." "p0";
 }
+
 :host.n-2 {
   grid: 50% 50% / 1fr;
-  grid-template-areas:
-    "p0"
-    "p1";
+  grid-template-areas: "p0" "p1";
 }
+
 :host.n-3 {
   grid: 62% 38% / 50% 50%;
-  grid-template-areas:
-    "p0 p1"
-    "p2 p2";
+  grid-template-areas: "p0 p1" "p2 p2";
 }
+
 :host.n-4 {
   grid: 50% 50% / 50% 50%;
-  grid-template-areas:
-    "p0 p1"
-    "p2 p3";
+  grid-template-areas: "p0 p1" "p2 p3";
 }
+
 :host.n-5 {
   grid: 37.5% 37.5% 25% / 50% 50%;
-  grid-template-areas:
-    "p0 p1"
-    "p2 p3"
-    "p4 p4";
+  grid-template-areas: "p0 p1" "p2 p3" "p4 p4";
 }
+
 :host.n-6 {
   grid: 33.33% 33.33% 33.33% / 50% 50%;
-  grid-template-areas:
-    "p0 p1"
-    "p2 p3"
-    "p4 p5";
+  grid-template-areas: "p0 p1" "p2 p3" "p4 p5";
 }
 
 game-counter.p-0 {
   grid-area: p0;
 }
+
 game-counter.p-1 {
   grid-area: p1;
 }
+
 game-counter.p-2 {
   grid-area: p2;
 }
+
 game-counter.p-3 {
   grid-area: p3;
 }
+
 game-counter.p-4 {
   grid-area: p4;
 }
+
 game-counter.p-5 {
   grid-area: p5;
+}
+
+.menu-button {
+  position: absolute;
+  left: calc(50% - 32px);
+  width: 40px;
+  height: 40px;
+  box-sizing: content-box;
+  padding: 12px;
+  border: none;
+  border-radius: 32px;
+  background-color: var(--mat-app-background-color, var(--mat-app-background, transparent));
+  color: inherit;
+  tab-index: -1;
+}
+
+:host.n-1 .menu-button {
+  top: calc(10% - 32px);
+}
+
+:host.n-2 .menu-button {
+  top: calc(50% - 32px);
+}
+
+:host.n-3 .menu-button {
+  top: calc(62% - 32px);
+}
+
+:host.n-4 .menu-button {
+  top: calc(50% - 32px);
+}
+
+:host.n-5 .menu-button {
+  top: calc(75% - 32px);
+}
+
+:host.n-6 .menu-button {
+  top: calc(66.66% - 32px);
+}
+
+.menu-button icon {
+  width: 40px;
+  height: 40px;
+  transform-origin: center;
+  transition: transform 100ms;
+}
+
+.menu-button:active icon {
+  transform: scale(0.8);
+}
+
+.menu-scrim {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+  transition: all 180ms;
+
+  display: grid;
+  grid-template: 1fr 1fr 2fr 0.6fr 2fr 0.6fr 1fr 2fr / 2fr 4fr 4fr 2fr;
+  grid-template-areas: "back title title ." ". . . ." ". share reset ." ". . . ."
+    ". history dice ." ". . . ." ". exit exit ." ". . . .";
+  place-items: center;
+}
+
+.menu-scrim.show {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: all;
+  background-color: #00000030;
+  backdrop-filter: blur(10px);
+}
+
+.menu-action {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  border-radius: 12px;
+  background-color: transparent;
+  color: inherit;
+}
+
+.menu-action icon {
+  flex: 1;
+}
+
+.menu-action label {
+  text-transform: uppercase;
+  margin: 4px 0 12px;
+  user-select: none;
+}
+
+.menu-action.share {
+  grid-area: share;
+}
+
+.menu-action.reset {
+  grid-area: reset;
+}
+
+.menu-action.history {
+  grid-area: history;
+}
+
+.menu-action.dice {
+  grid-area: dice;
+}
+
+.exit-button {
+  grid-area: exit;
+}
+
+.menu-title {
+  grid-area: title;
 }
