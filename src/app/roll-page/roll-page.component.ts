@@ -6,6 +6,7 @@ import {COLORS, HASH_SEPARATOR} from "../../lib/constants";
 
 @Component({
   selector: 'roll-page',
+  host: {'class': 'page'},
   standalone: true,
   imports: [
     MatButtonModule,

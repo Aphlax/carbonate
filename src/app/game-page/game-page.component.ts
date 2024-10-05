@@ -19,6 +19,7 @@ const ORIENTATIONS = [
 
 @Component({
   selector: 'game-page',
+  host: {'class': 'page'},
   standalone: true,
   imports: [GameCounterComponent, NgFor, MatButtonModule, IconComponent, NgClass, MatIcon, RouterLink, MatRippleModule],
   templateUrl: './game-page.component.html',

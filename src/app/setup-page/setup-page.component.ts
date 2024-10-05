@@ -9,6 +9,7 @@ import {MatIconModule} from "@angular/material/icon";
 
 @Component({
   selector: 'setup-page',
+  host: {'class': 'page'},
   standalone: true,
   imports: [
     MatRadioButton,

@@ -5,6 +5,7 @@ import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'start-page',
+  host: {'class': 'page'},
   standalone: true,
   imports: [
     MatButtonModule,
