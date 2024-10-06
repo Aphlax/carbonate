@@ -16,10 +16,6 @@ import {NgIf} from "@angular/common";
   styleUrl: './start-page.component.scss'
 })
 export class StartPageComponent {
-
-
-
-
   get gameHash() {
     return window.location.hash.slice(1);
   }
