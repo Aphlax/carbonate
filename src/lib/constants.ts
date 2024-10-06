@@ -15,6 +15,16 @@ export const COLORS = new Map([
   ["V", "#7857A6"], // Violet
 ]);
 
+export function getRandomColor(used: string[]): string {
+  const options = [];
+  for (let color of COLORS.keys()) {
+    if (!used.includes(color)) {
+      options.push(color);
+    }
+  }
+  return options[Math.floor(Math.random() * options.length)];
+}
+
 export const ICONS = [
   "H"
 ];
@@ -62,3 +72,15 @@ export function parseHash(hash: string): { players: Player[], startingLifeTotal:
 
   return {players, startingLifeTotal};
 }
+
+export const PLAYER_POSITIONS = [
+  [{x: 0.5, y: 0.5}],
+  [{x: 0.5, y: 0.25}, {x: 0.5, y: 0.75}],
+  [{x: 0.25, y: 0.31}, {x: 0.75, y: 0.31}, {x: 0.5, y: 0.81}],
+  [{x: 0.25, y: 0.25}, {x: 0.75, y: 0.25}, {x: 0.25, y: 0.75}, {x: 0.75, y: 0.75}],
+  [{x: 0.25, y: 0.2}, {x: 0.75, y: 0.2}, {x: 0.25, y: 0.6}, {x: 0.75, y: 0.6}, {x: 0.5, y: 0.87}],
+  [{x: 0.25, y: 0.2}, {x: 0.75, y: 0.2}, {x: 0.25, y: 0.5}, {x: 0.75, y: 0.5}, {
+    x: 0.25,
+    y: 0.8
+  }, {x: 0.75, y: 0.8}],
+]

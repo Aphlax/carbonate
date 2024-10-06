@@ -1,6 +1,15 @@
-<canvas></canvas>
+<canvas #canvas (touchend)="touchEnd($event)" (touchmove)="touchMove($event)"
+        (touchstart)="touchStart($event)"></canvas>
 
-<a class="back-button" mat-icon-button aria-label="Back" routerLink="/setup" fragment="{{players}}:{{life}}">
+<a class="back-button" mat-icon-button aria-label="Back" routerLink="/setup"
+   fragment="{{players}}:{{life}}">
   <mat-icon>arrow_back</mat-icon>
 </a>
+<div class="description">
+  <h3>Starting player</h3>
+  <p>
+    Each player can hold a finger on the screen, after 3 seconds a player is chosen randomly to
+    start the game.
+  </p>
+</div>
 <a class="continue" routerLink="/game" [fragment]="gameHash" mat-flat-button>Skip</a>

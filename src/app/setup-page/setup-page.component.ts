@@ -25,17 +25,19 @@ import {MatIconModule} from "@angular/material/icon";
   styleUrl: './setup-page.component.scss'
 })
 export class SetupPageComponent implements OnInit {
-  randomColors = [Math.floor(Math.random() * COLORS.size)];
+  randomColor = [...COLORS.keys()][Math.floor(Math.random() * COLORS.size)];
   players: number = 4;
   life: number = 40;
 
-  ngOnInit(): void {
-    if (!window.location.hash) return;
-    this.players = parseInt(window.location.hash.slice(1, 2));
-    this.life = parseInt(window.location.hash.slice(3, 5));
+  get gameHash() {
+    return this.randomColor + this.life + HASH_SEPARATOR + this.life;
   }
 
-  get gameHash() {
-    return this.randomColors.map(c => [...COLORS.keys()][c])[0] + this.life + HASH_SEPARATOR + this.life;
+  ngOnInit(): void {
+    if (!window.location.hash) return;
+    const players = parseInt(window.location.hash.slice(1, 2));
+    this.players = isNaN(players) ? 4 : players;
+    const life = parseInt(window.location.hash.slice(3, 5));
+    this.life = isNaN(life) ? 40 : life;
   }
 }

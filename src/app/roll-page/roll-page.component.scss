@@ -6,15 +6,48 @@
   align-items: stretch;
 }
 
+canvas {
+  flex: 1;
+}
+
 .back-button {
   position: absolute;
   top: 16px;
   left: 16px;
   align-self: start;
+  transition: opacity 200ms;
 }
 
-canvas {
-  flex: 1;
+:host.rolling .back-button {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.description {
+  position: absolute;
+  top: 40%;
+  left: 16%;
+  width: 68%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 200ms;
+}
+
+.description h3 {
+  text-transform: uppercase;
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+.description p {
+  text-align: center;
+}
+
+:host.rolling .description {
+  opacity: 0;
 }
 
 .continue {
@@ -22,4 +55,10 @@ canvas {
   top: 70%;
   left: 50%;
   transform: translate(-50%, 0);
+  transition: opacity 200ms;
+}
+
+:host.rolling .continue {
+  opacity: 0;
+  pointer-events: none;
 }
