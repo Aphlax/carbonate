@@ -25,6 +25,20 @@
   </button>
   <a class="exit-button" mat-stroked-button routerLink="/">Exit</a>
 </div>
+<div [ngClass]="{show: showShare}" class="menu-scrim share">
+  <button (click)="showShare = false; showMenu = false;" aria-label="close" mat-icon-button>
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h2 class="menu-title">Share</h2>
+  <qrcode [colorDark]="'#ffffffff'"
+          [colorLight]="'#00000000'"
+          [elementType]="'svg'"
+          [errorCorrectionLevel]="'M'"
+          [margin]="4"
+          [qrdata]="shareUrl"
+          [width]="300"></qrcode>
+  <button (click)="share()" class="share-button" mat-button>Share</button>
+</div>
 <div class="menu-scrim history" [ngClass]="{show: showHistory}">
   <button mat-icon-button aria-label="close" (click)="showHistory = false; showMenu = false;">
     <mat-icon>arrow_back</mat-icon>
@@ -37,10 +51,4 @@
   </button>
   <h2 class="menu-title">Dice</h2>
 
-</div>
-<div class="menu-scrim share" [ngClass]="{show: showShare}">
-  <button mat-icon-button aria-label="close" (click)="showShare = false; showMenu = false;">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
-  <h2 class="menu-title">Share</h2>
 </div>

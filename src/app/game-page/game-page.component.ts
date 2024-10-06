@@ -7,6 +7,7 @@ import {MatIcon} from "@angular/material/icon";
 import {IconComponent} from "../icon/icon.component";
 import {RouterLink} from "@angular/router";
 import {MatRippleModule} from "@angular/material/core";
+import {QRCodeModule} from "angularx-qrcode";
 
 const ORIENTATIONS = [
   ["down"],
@@ -21,7 +22,7 @@ const ORIENTATIONS = [
   selector: 'game-page',
   host: {'class': 'page'},
   standalone: true,
-  imports: [GameCounterComponent, NgFor, MatButtonModule, IconComponent, NgClass, MatIcon, RouterLink, MatRippleModule],
+  imports: [GameCounterComponent, NgFor, MatButtonModule, IconComponent, NgClass, MatIcon, RouterLink, MatRippleModule, QRCodeModule],
   templateUrl: './game-page.component.html',
   styleUrl: './game-page.component.scss'
 })
@@ -49,5 +50,18 @@ export class GamePageComponent implements OnInit {
 
   reset() {
     this.players.forEach(player => player.counters[0].value = this.startingLifeTotal);
+  }
+
+  get shareUrl() {
+    return window.location.toString();
+  }
+
+  async share() {
+    if ('share' in navigator) {
+      await navigator.share({url: this.shareUrl});
+    } else if ('clipboard' in navigator) {
+      // @ts-expect-error
+      await navigator.clipboard.writeText(this.shareUrl);
+    }
   }
 }

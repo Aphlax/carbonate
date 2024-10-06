@@ -29,8 +29,8 @@ function hump(x: number): number {
   return x < 0.5 ? ease(2 * x) : ease(2 - 2 * x);
 }
 
-const CIRCLE_RADIUS = 40;
-const CIRCLE_RADIUS_HUMP = 100;
+const CIRCLE_RADIUS = 50;
+const CIRCLE_RADIUS_HUMP = 90;
 const CIRCLE_SIZE = (t: number) => t < 0.5 ? 0 : t < 1.5 ? hump(t - 0.5) : t < 2.5 ? hump(t - 1.5) : t < 3.5 ? ease(t - 2.5) * 2 : 2;
 const CIRCLE_SIZE_LOSER = (t: number) => t < 3.5 ? 1 - ease(t - 2.5) : 0;
 

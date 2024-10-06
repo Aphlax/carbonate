@@ -113,9 +113,10 @@ game-counter.p-5 {
   left: 0;
   right: 0;
   opacity: 0;
+  visibility: hidden;
   transform: scale(0.9);
   pointer-events: none;
-  transition: all 180ms;
+  transition: all 180ms, display step-end 180ms;
 
   display: grid;
   grid-template: 1fr 1fr 2fr 0.6fr 2fr 0.6fr 1fr 2fr / 2fr 4fr 4fr 2fr;
@@ -126,10 +127,16 @@ game-counter.p-5 {
 
 .menu-scrim.show {
   opacity: 1;
+  visibility: visible;
   transform: scale(1);
   pointer-events: all;
   background-color: #00000088;
   backdrop-filter: blur(10px);
+  transition: all 180ms, display step-start 180ms;
+}
+
+.menu-scrim.share {
+  background-color: #000000A0;
 }
 
 .menu-action {
@@ -176,4 +183,16 @@ game-counter.p-5 {
 
 .menu-title {
   grid-area: title;
+  font-size: 24px;
+  line-height: 24px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.share qrcode {
+  grid-area: 3/2/6/4;
+}
+
+.share-button {
+  grid-area: 7/2/8/4;
 }
