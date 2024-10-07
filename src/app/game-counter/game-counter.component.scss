@@ -97,6 +97,11 @@
   background-color: transparent;
 }
 
+.increase-button:focus, .decrease-button:focus {
+  background-color: #AAAAFF20;
+  outline: none;
+}
+
 .increase-button {
   position: absolute;
   top: 0;

@@ -6,6 +6,12 @@
   justify-content: space-evenly;
 }
 
+.share-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
 .caption {
   display: flex;
   flex-direction: column;
@@ -16,6 +22,61 @@ h1 {
   margin: 0;
 }
 
-a {
-  margin-top: 0;
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttons > * {
+  margin: 8px;
+}
+
+.menu-scrim {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.9);
+  pointer-events: none;
+  transition: all 180ms, display step-end 180ms;
+
+  display: grid;
+  grid-template: 1fr 1fr 2fr 0.6fr 2fr 0.6fr 1fr 2fr / 2fr 4fr 4fr 2fr;
+  grid-template-areas: "back title title ." ". . . ." ". share reset ." ". . . ."
+    ". history dice ." ". . . ." ". exit exit ." ". . . .";
+  place-items: center;
+}
+
+.menu-scrim.show {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  pointer-events: all;
+  background-color: #00000088;
+  backdrop-filter: blur(10px);
+  transition: all 180ms, display step-start 180ms;
+}
+
+.menu-scrim.share {
+  background-color: #000000A0;
+}
+
+.menu-title {
+  grid-area: title;
+  font-size: 24px;
+  line-height: 24px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.share qrcode {
+  grid-area: 3/2/6/4;
+}
+
+.share label {
+  grid-area: 6/2/7/4;
 }

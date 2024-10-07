@@ -1,9 +1,9 @@
 <svg fill="black"
      height="192"
-     version="1.1" viewBox="-5 -5 110 110"
+     version="1.1" viewBox="-20 -20 140 140"
      width="192"
      xmlns="http://www.w3.org/2000/svg">
-  <rect fill="#90C462" height="110" width="110" x="-5" y="-5"/>
+  <rect fill="#90C462" height="140" width="140" x="-20" y="-20"/>
   <circle cx="9" cy="50" r="9"></circle>
   <circle cx="28.5" cy="13.13" r="9"></circle>
   <circle cx="70.5" cy="13.13" r="9"></circle>

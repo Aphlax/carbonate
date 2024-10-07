@@ -1,6 +1,25 @@
+<button (click)="showShare = true;" class="share-button" mat-icon-button>
+  <mat-icon>share</mat-icon>
+</button>
 <div class="caption">
   <h1>Carbonate</h1>
   <p>by Fabian</p>
 </div>
-<a routerLink="/setup" mat-flat-button>New game</a>
-<a routerLink="/game" [fragment]="gameHash" *ngIf="gameHash" mat-flat-button>Continue</a>
+<div class="buttons">
+  <a mat-flat-button routerLink="/setup">New game</a>
+  <a *ngIf="gameHash" [fragment]="gameHash" mat-flat-button routerLink="/game">Continue</a>
+</div>
+<div [ngClass]="{show: showShare}" class="menu-scrim share">
+  <button (click)="showShare = false;" aria-label="close" mat-icon-button>
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h2 class="menu-title">Share</h2>
+  <qrcode [colorDark]="'#ffffffff'"
+          [colorLight]="'#00000000'"
+          [elementType]="'svg'"
+          [errorCorrectionLevel]="'M'"
+          [margin]="4"
+          [qrdata]="shareUrl"
+          [width]="300"></qrcode>
+  <label>{{shareUrl}}</label>
+</div>

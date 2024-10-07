@@ -3,9 +3,9 @@
   "short_name": "carbonate",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
-  "display": "standalone",
+  "display": "fullscreen",
   "scope": "./",
-  "start_url": "./",
+  "start_url": "./?fullscreen=true",
   "icons": [
     {
       "src": "icons/icon-192x192.svg",

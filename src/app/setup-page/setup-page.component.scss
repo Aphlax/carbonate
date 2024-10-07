@@ -13,6 +13,7 @@
 label {
   margin: 56px 0 10px;
   text-transform: uppercase;
+  user-select: none;
 }
 
 .life {
@@ -40,6 +41,7 @@ button {
   background-color: transparent;
   transition: color 150ms;
   color: #90C462;
+  user-select: none;
 }
 button.selected {
   color: black;
