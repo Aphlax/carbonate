@@ -1,0 +1,7 @@
+{
+  "url": "192.168.0.15",
+  "user": "user",
+  "keyPath": "./fabiansserver-user.id_rsa",
+  "packageDir": "./dist/carbonate/browser/",
+  "prodDir": "/home/user/carbonate/app/"
+}

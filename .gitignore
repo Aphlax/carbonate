@@ -37,6 +37,7 @@ yarn-error.log
 testem.log
 /typings
 /dev
+*.id_rsa
 
 # System files
 .DS_Store
