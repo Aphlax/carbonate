@@ -85,10 +85,16 @@
   justify-self: stretch;
   align-self: center;
 }
+
 :host.right .icon {
   transform: rotate(270deg);
   justify-self: stretch;
   align-self: center;
+}
+
+.increase-button, .decrease-button {
+  border: none;
+  background-color: transparent;
 }
 
 .increase-button {
@@ -98,6 +104,7 @@
   right: 0;
   bottom: 50%;
 }
+
 :host.left .increase-button {
   bottom: 0;
   left: 50%;

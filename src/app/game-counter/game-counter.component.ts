@@ -5,6 +5,11 @@ import {NgFor} from "@angular/common";
 import {FitCounterDirective} from "../fit-counter.directive";
 import {COLORS, Player} from "../../lib/constants";
 
+interface Point {
+  x: number;
+  y: number;
+}
+
 @Component({
   selector: 'game-counter',
   standalone: true,
@@ -24,9 +29,12 @@ export class GameCounterComponent {
   }
 
   firstChange: boolean = false;
+  touchPoint?: Point;
   timeoutHandle: number = 0;
 
   touchStart(icon: string, amount: number, event: TouchEvent) {
+    if (event.touches.length > 1) return;
+    this.touchPoint = {x: event.touches[0].clientX, y: event.touches[0].clientY};
     this.firstChange = false;
     this.timeoutHandle = setTimeout(this.update.bind(this), 300, icon, amount);
   }
@@ -38,6 +46,9 @@ export class GameCounterComponent {
   }
 
   touchMove(event: TouchEvent) {
+    if (event.changedTouches.length > 1 || !this.touchPoint) return;
+    if (Math.sqrt((event.changedTouches[0].clientX - this.touchPoint.x) ** 2 +
+      (event.changedTouches[0].clientY - this.touchPoint.y) ** 2) < 10) return;
     this.firstChange = true;
     if (this.timeoutHandle) {
       clearTimeout(this.timeoutHandle);

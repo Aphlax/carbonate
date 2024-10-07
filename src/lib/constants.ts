@@ -29,14 +29,14 @@ export const ICONS = [
   "H"
 ];
 
-export class Counter {
-  icon!: string;
-  value!: number;
+export interface Counter {
+  icon: string;
+  value: number;
 }
 
-export class Player {
-  counters!: Counter[];
-  color!: string;
+export interface Player {
+  counters: Counter[];
+  color: string;
 }
 
 export const HASH_SEPARATOR = ":";

@@ -12,13 +12,13 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {COLORS, getRandomColor, HASH_SEPARATOR, PLAYER_POSITIONS} from "../../lib/constants";
 
-class PlayerTouch {
-  x!: number;
-  y!: number;
-  id!: number;
-  color!: string;
-  circle = 0;
-  winner = false;
+interface PlayerTouch {
+  x: number;
+  y: number;
+  id: number;
+  color: string;
+  circle: number;
+  winner: boolean;
 }
 
 function ease(x: number): number {
