@@ -34,6 +34,9 @@ export class GamePageComponent implements OnInit, OnDestroy {
   showShare: boolean = false;
   showHistory: boolean = false;
   showDice: boolean = false;
+  diceMin: number = 1;
+  diceMax: number = 6;
+  diceResult: number[] = [];
 
   @HostBinding('class') get playerCount(): string {
     return "n-" + this.players.length;
@@ -94,6 +97,16 @@ export class GamePageComponent implements OnInit, OnDestroy {
     } else if ('clipboard' in navigator) {
       // @ts-expect-error
       await navigator.clipboard.writeText(this.shareUrl);
+    }
+  }
+
+  throwDice() {
+    this.diceResult = [];
+    for (let i = 0; i < 7; i++) {
+      this.diceResult[i] = Math.floor(this.diceMin + Math.random() * (this.diceMax - this.diceMin + 1));
+      if (this.diceResult[i] == this.diceResult[i - 1]) {
+        this.diceResult[i] = Math.floor(this.diceMin + Math.random() * (this.diceMax - this.diceMin + 1));
+      }
     }
   }
 }

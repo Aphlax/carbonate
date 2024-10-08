@@ -192,6 +192,7 @@ game-counter.p-5 {
   line-height: 24px;
   margin: 0;
   text-transform: uppercase;
+  user-select: none;
 }
 
 .share qrcode {
@@ -200,4 +201,85 @@ game-counter.p-5 {
 
 .share-button {
   grid-area: 7/2/8/4;
+}
+
+.dice-setting {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.dice-setting label {
+  line-height: 40px;
+  width: 80px;
+  text-align: center;
+  user-select: none;
+}
+
+.dice-setting.minimum {
+  grid-area: 3/2/4/4;
+}
+
+.dice-setting.maximum {
+  grid-area: 5/2/6/4;
+}
+
+.dice-result-container {
+  grid-area: 4/2/5/4;
+  position: relative;
+  width: 100px;
+  height: 28px;
+}
+
+@keyframes dice-animation {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.dice-result {
+  position: absolute;
+  font-size: 28px;
+  line-height: 28px;
+  width: 100px;
+  text-align: center;
+  user-select: none;
+  opacity: 0;
+
+  animation: dice-animation 100ms alternate;
+  animation-iteration-count: 2;
+}
+
+.dice-result:last-child {
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.dice-roll {
+  grid-area: 4/2/5/4;
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity 200ms ease-in-out, pointer-events 200ms step-end;
+}
+
+.rolling .dice-roll {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dice-reset {
+  grid-area: 4/3/5/5;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease-in-out, pointer-events 200ms step-end;
+}
+
+.rolling .dice-reset {
+  opacity: 1;
+  pointer-events: all;
 }

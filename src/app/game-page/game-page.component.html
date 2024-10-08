@@ -45,10 +45,39 @@
   </button>
   <h2 class="menu-title">History</h2>
 </div>
-<div class="menu-scrim dice" [ngClass]="{show: showDice}">
+<div [ngClass]="{show: showDice, rolling: diceResult.length}" class="menu-scrim dice">
   <button mat-icon-button aria-label="close" (click)="showDice = false; showMenu = false;">
     <mat-icon>arrow_back</mat-icon>
   </button>
   <h2 class="menu-title">Dice</h2>
-
+  <div class="dice-setting minimum">
+    <button (click)="diceMin = diceMin - 1;" mat-icon-button>
+      <mat-icon>remove</mat-icon>
+    </button>
+    <label>{{diceMin}}</label>
+    <button (click)="diceMin = diceMin + 1;" [disabled]="diceMin >= diceMax" mat-icon-button>
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div class="dice-result-container">
+    <div *ngFor="let value of diceResult; index as i" class="dice-result"
+         style="animation-delay: {{i * 100}}ms;">
+      {{value}}
+    </div>
+  </div>
+  <button (click)="throwDice()" class="dice-roll" mat-flat-button>
+    Roll
+  </button>
+  <button (click)="diceResult = [];" class="dice-reset" mat-icon-button>
+    <icon icon="reset"></icon>
+  </button>
+  <div class="dice-setting maximum">
+    <button (click)="diceMax = diceMax - 1;" [disabled]="diceMin >= diceMax" mat-icon-button>
+      <mat-icon>remove</mat-icon>
+    </button>
+    <label>{{diceMax}}</label>
+    <button (click)="diceMax = diceMax + 1;" mat-icon-button>
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 </div>
