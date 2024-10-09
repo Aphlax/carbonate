@@ -3,8 +3,8 @@ import {
   Directive,
   ElementRef,
   HostListener,
+  Input,
   OnChanges,
-  Renderer2,
   SimpleChanges
 } from '@angular/core';
 
@@ -13,9 +13,15 @@ import {
   standalone: true
 })
 export class FitCounterDirective implements AfterViewInit, OnChanges {
+  @Input() fitCounter!: number;
+  private canvas: HTMLCanvasElement;
+  private ctx: CanvasRenderingContext2D;
+  private styles: CSSStyleDeclaration;
 
   constructor(private elem: ElementRef) {
-
+    this.canvas = document.createElement("canvas");
+    this.ctx = this.canvas.getContext("2d")!;
+    this.styles = getComputedStyle(elem.nativeElement);
   }
 
   @HostListener('window:resize')
@@ -23,25 +29,32 @@ export class FitCounterDirective implements AfterViewInit, OnChanges {
     this.setFontSize();
   };
 
-  private setFontSize() {
-    let height = this.elem.nativeElement.clientHeight, width = this.elem.nativeElement.clientWidth;
-    if (getComputedStyle(this.elem.nativeElement).writingMode == 'vertical-rl') {
-      [height, width] = [width, height];
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['fitCounter'] && !changes['fitCounter'].firstChange ||
+      changes['innerHTML'] && !changes['innerHTML'].firstChange) {
+      this.setFontSize();
     }
-
-
-    this.elem.nativeElement.style.fontSize = (height - 6) + "px";
   }
 
   ngAfterViewInit(): void {
     this.setFontSize();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['innerHTML']) {
-      if (!changes['innerHTML'].firstChange) {
-        this.setFontSize();
-      }
+  private setFontSize() {
+    let height = this.elem.nativeElement.clientHeight, width = this.elem.nativeElement.clientWidth;
+    if (this.styles.writingMode == 'vertical-rl') {
+      [height, width] = [width, height];
     }
+
+    const fontWeight = this.styles.fontWeight || 'normal';
+    const fontFamily = this.styles.fontFamily || 'Arial';
+    let fontSize = height - 6;
+    this.ctx.font = `${fontWeight} ${fontSize + "px"} ${fontFamily}`;
+    const expectedWidth = this.ctx.measureText(this.fitCounter.toString()).width;
+    if (expectedWidth > width) {
+      fontSize = Math.floor(fontSize * width / expectedWidth);
+    }
+    this.elem.nativeElement.style.fontSize = fontSize + "px";
+    this.elem.nativeElement.style.lineHeight = height + "px";
   }
 }

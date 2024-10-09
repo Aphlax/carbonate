@@ -48,7 +48,7 @@ export class GameCounterComponent {
   touchMove(event: TouchEvent) {
     if (event.changedTouches.length > 1 || !this.touchPoint) return;
     if (Math.sqrt((event.changedTouches[0].clientX - this.touchPoint.x) ** 2 +
-      (event.changedTouches[0].clientY - this.touchPoint.y) ** 2) < 10) return;
+      (event.changedTouches[0].clientY - this.touchPoint.y) ** 2) < 20) return;
     this.firstChange = true;
     if (this.timeoutHandle) {
       clearTimeout(this.timeoutHandle);

@@ -1,7 +1,7 @@
 <div class="rotatable-container {{player.color}}">
   <div class="counter" *ngFor="let counter of player.counters; index as i">
-    <div class="value" fitCounter>
-      <span>{{counter.value}}</span>
+    <div [fitCounter]="counter.value" class="value">
+      {{counter.value}}
     </div>
     <icon class="icon" icon="H"></icon>
     <button (touchend)="touchEnd(counter.icon, 1); $event.preventDefault();"
