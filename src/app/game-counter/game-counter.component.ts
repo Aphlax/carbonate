@@ -1,9 +1,10 @@
 import {Component, HostBinding, Input} from '@angular/core';
 import {MatRippleModule} from "@angular/material/core";
 import {IconComponent} from "../icon/icon.component";
-import {NgFor} from "@angular/common";
+import {NgClass, NgFor} from "@angular/common";
 import {FitCounterDirective} from "../fit-counter.directive";
 import {COLORS, Player} from "../../lib/constants";
+import {MatButtonModule, MatIconButton} from "@angular/material/button";
 
 interface Point {
   x: number;
@@ -13,7 +14,7 @@ interface Point {
 @Component({
   selector: 'game-counter',
   standalone: true,
-  imports: [MatRippleModule, IconComponent, NgFor, FitCounterDirective],
+  imports: [MatRippleModule, IconComponent, NgFor, FitCounterDirective, MatIconButton, NgClass, MatButtonModule],
   templateUrl: './game-counter.component.html',
   styleUrl: './game-counter.component.scss'
 })
@@ -31,11 +32,15 @@ export class GameCounterComponent {
   firstChange: boolean = false;
   touchPoint?: Point;
   timeoutHandle: number = 0;
+  counters: { [id: string]: boolean } = {};
 
   touchStart(icon: string, amount: number, event: TouchEvent) {
     if (event.touches.length > 1) return;
     this.touchPoint = {x: event.touches[0].clientX, y: event.touches[0].clientY};
     this.firstChange = false;
+    if (this.timeoutHandle) {
+      clearTimeout(this.timeoutHandle);
+    }
     this.timeoutHandle = setTimeout(this.update.bind(this), 300, icon, amount);
   }
 
@@ -64,5 +69,9 @@ export class GameCounterComponent {
       clearTimeout(this.timeoutHandle);
       this.timeoutHandle = 0;
     }
+  }
+
+  changeCounters() {
+
   }
 }

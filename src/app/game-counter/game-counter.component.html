@@ -1,9 +1,56 @@
+<div class="additional-counters">
+  <div class="additional-counters-row">
+    <button (click)="counters['X'] = !counters['X'];" [ngClass]="{active: counters['X']}"
+            mat-icon-button>
+      <icon icon="X"></icon>
+    </button>
+    <button (click)="counters['O'] = !counters['O'];" [ngClass]="{active: counters['O']}"
+            mat-icon-button>
+      <icon icon="O"></icon>
+    </button>
+    <button (click)="counters['E'] = !counters['E'];" [ngClass]="{active: counters['E']}"
+            mat-icon-button>
+      <icon icon="E"></icon>
+    </button>
+    <button (click)="counters['Z'] = !counters['Z'];" [ngClass]="{active: counters['Z']}"
+            mat-icon-button>
+      <icon icon="Z"></icon>
+    </button>
+    <button (click)="counters['C'] = !counters['C'];" [ngClass]="{active: counters['C']}"
+            mat-icon-button>
+      <icon icon="C"></icon>
+    </button>
+  </div>
+  <div class="additional-counters-row">
+    <button (click)="counters['W'] = !counters['W'];" [ngClass]="{active: counters['W']}"
+            mat-icon-button>
+      <icon icon="W"></icon>
+    </button>
+    <button (click)="counters['U'] = !counters['U'];" [ngClass]="{active: counters['U']}"
+            mat-icon-button>
+      <icon icon="U"></icon>
+    </button>
+    <button (click)="counters['R'] = !counters['R'];" [ngClass]="{active: counters['R']}"
+            mat-icon-button>
+      <icon icon="R"></icon>
+    </button>
+    <button (click)="counters['B'] = !counters['B'];" [ngClass]="{active: counters['B']}"
+            mat-icon-button>
+      <icon icon="B"></icon>
+    </button>
+    <button (click)="counters['G'] = !counters['G'];" [ngClass]="{active: counters['G']}"
+            mat-icon-button>
+      <icon icon="G"></icon>
+    </button>
+  </div>
+  <button (click)="changeCounters()" class="done-button" mat-flat-button>Done</button>
+</div>
 <div class="rotatable-container {{player.color}}">
   <div class="counter" *ngFor="let counter of player.counters; index as i">
     <div [fitCounter]="counter.value" class="value">
       {{counter.value}}
     </div>
-    <icon class="icon" icon="H"></icon>
+    <icon [icon]="counter.icon || 'H'" class="icon"></icon>
     <button (touchend)="touchEnd(counter.icon, 1); $event.preventDefault();"
             matRipple
             [matRippleColor]="rippleColor"

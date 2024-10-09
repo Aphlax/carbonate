@@ -12,9 +12,9 @@ $packageDir = $config.packageDir
 $prodDir = $config.prodDir
 
 echo "removing old version."
-ssh -i $keyPath -o "StrictHostKeyChecking=no" -q $user@$url "rm -r $prodDir*"
+ssh -i $keyPath -o "StrictHostKeyChecking=no" -o "ConnectTimeout=5" -q $user@$url "rm -r $prodDir*"
 
 echo "deploying new version."
-scp -i $keyPath -o "StrictHostKeyChecking=no" -q -r "$packageDir*" $user@"$url":$prodDir
+scp -i $keyPath -o "StrictHostKeyChecking=no" -o "ConnectTimeout=5" -q -r "$packageDir*" $user@"$url":$prodDir
 
 echo "deployed successfully."

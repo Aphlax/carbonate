@@ -68,7 +68,7 @@ game-counter.p-5 {
   border-radius: 32px;
   background-color: var(--mat-app-background-color, var(--mat-app-background, transparent));
   color: inherit;
-  tab-index: -1;
+  z-index: 3;
 }
 
 :host.n-1 .menu-button {
@@ -98,12 +98,6 @@ game-counter.p-5 {
 .menu-button icon {
   width: 40px;
   height: 40px;
-  transform-origin: center;
-  transition: transform 100ms;
-}
-
-.menu-button:active icon {
-  transform: scale(0.8);
 }
 
 .menu-button:focus {
@@ -117,6 +111,7 @@ game-counter.p-5 {
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 4;
   opacity: 0;
   visibility: hidden;
   transform: scale(0.9);

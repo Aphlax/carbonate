@@ -1,22 +1,106 @@
-
-
 :host {
+  position: relative;
+}
+
+.additional-counters {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+}
+
+:host.up .additional-counters {
+  flex-direction: column-reverse;
+}
+
+:host.left .additional-counters {
+  flex-direction: row-reverse;
+}
+
+:host.right .additional-counters {
+  flex-direction: row;
+}
+
+.additional-counters-row {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 20px;
+  justify-content: space-evenly;
+}
+
+:host.up .additional-counters-row {
+  flex-direction: row-reverse;
+}
+
+:host.left .additional-counters-row {
+  margin: 20px 10px;
+  flex-direction: column;
+}
+
+:host.right .additional-counters-row {
+  margin: 20px 10px;
+  flex-direction: column-reverse;
+}
+
+:host.up .additional-counters-row button {
+  transform: rotate(180deg);
+}
+
+:host.left .additional-counters-row button {
+  transform: rotate(90deg);
+}
+
+:host.right .additional-counters-row button {
+  transform: rotate(-90deg);
+}
+
+.additional-counters-row button.active {
+  background-color: #02DDDDFF;
+  color: black;
+}
+
+.done-button {
+  align-self: center;
+}
+
+:host.left .done-button {
+  width: 40px;
+  transform: rotate(90deg);
+}
+
+:host.right .done-button {
+  width: 40px;
+  transform: rotate(-90deg);
 }
 
 .rotatable-container {
-  flex: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   align-items: stretch;
   justify-content: stretch;
+  background-color: var(--mat-app-background-color, var(--mat-app-background, transparent));
+  z-index: 2;
 }
 
 :host.up .rotatable-container {
   transform: rotate(180deg);
+  top: unset;
+  bottom: 0;
 }
 :host.left .rotatable-container {
   flex-direction: column;
+  left: unset;
+  right: 0;
 }
 :host.right .rotatable-container {
   flex-direction: column-reverse;
@@ -136,17 +220,3 @@
 :host.up .increase-button, :host.up .decrease-button {
   transform: rotate(180deg);
 }
-
-$colorW: #FFFFFF; // White
-$colorP: #D44063; // Purple
-$colorR: #E15950; // Red
-$colorO: #ED7743; // Orange
-$colorA: #F1A14B; // Apricot
-$colorY: #F7CF54; // Yellow
-$colorL: #90C462; // Lime
-$colorG: #57BD7B; // Green
-$colorT: #4C9F9C; // Turquoise
-$colorU: #4880C0; // U Blue
-$colorD: #5C6BB3; // Denim
-$colorV: #7857A6; // Violet
-

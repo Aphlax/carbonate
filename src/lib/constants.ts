@@ -1,16 +1,44 @@
 
+/*
+A - Apricot
+B - Black
+C - Colorless
+D - Deep-blue
+E - Square
+F - Fire
+G - Green
+H - Heart
+I - Ivory
+J - Jungle
+K -
+L - Lime
+M - Merlot
+N -
+O - Circle
+P - Purple
+Q -
+R - Red
+S - Sapphire
+T - Turquoise
+U - Blue
+V - Violet
+W - White
+X - Cross
+Y - Yellow
+Z - Triangle
+ */
 
 export const COLORS = new Map([
-  ["W", "#FFFFFF"], // White
+  ["I", "#FDF6E4"], // Ivory
   ["P", "#D44063"], // Purple
-  ["R", "#E15950"], // Red
-  ["O", "#ED7743"], // Orange
+  ["M", "#E15950"], // Merlot
+  ["F", "#ED7743"], // Fire
   ["A", "#F1A14B"], // Apricot
   ["Y", "#F7CF54"], // Yellow
   ["L", "#90C462"], // Lime
-  ["G", "#57BD7B"], // Green
+  ["J", "#57BD7B"], // Jungle
   ["T", "#4C9F9C"], // Turquoise
-  ["U", "#4880C0"], // U Blue
+  ["S", "#4880C0"], // Sapphire
   ["D", "#5C6BB3"], // Denim
   ["V", "#7857A6"], // Violet
 ]);
