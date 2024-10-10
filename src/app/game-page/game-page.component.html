@@ -1,4 +1,8 @@
-<game-counter *ngFor="let player of players; index as i" class="p-{{i}} {{getOrientation(i)}}" [player]="player">
+<game-counter (onChangeCounter)="changeCounter($event.player, $event.counter, $event.amount)"
+              (onSetCounters)="setCounters($event.player, $event.counters)"
+              *ngFor="let player of players; index as i" [direction]="getOrientation(i)"
+              [player]="player"
+              class="p-{{i}}">
 </game-counter>
 <button class="menu-button" (click)="showMenu = true;" matRipple [matRippleCentered]="true">
   <icon icon="carbonate"></icon>

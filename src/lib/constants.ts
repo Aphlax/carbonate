@@ -1,9 +1,8 @@
-
 /*
 A - Apricot
 B - Black
 C - Colorless
-D - Deep-blue
+D - Denim
 E - Square
 F - Fire
 G - Green
@@ -79,8 +78,8 @@ export const ICONS_PARSE_REGEX =
 
 export function createHash(players: Player[], startingLifeTotal: number): string {
   return players.map(pl =>
-    pl.color + pl.counters[0].value + pl.counters.slice(1).map(c => c.icon + c.value).join())
-    .join() + HASH_SEPARATOR + startingLifeTotal;
+    pl.color + pl.counters[0].value + pl.counters.slice(1).map(c => c.icon + c.value).join(""))
+    .join("") + HASH_SEPARATOR + startingLifeTotal;
 }
 
 export function parseHash(hash: string): { players: Player[], startingLifeTotal: number } {
@@ -107,8 +106,17 @@ export const PLAYER_POSITIONS = [
   [{x: 0.25, y: 0.31}, {x: 0.75, y: 0.31}, {x: 0.5, y: 0.81}],
   [{x: 0.25, y: 0.25}, {x: 0.75, y: 0.25}, {x: 0.25, y: 0.75}, {x: 0.75, y: 0.75}],
   [{x: 0.25, y: 0.2}, {x: 0.75, y: 0.2}, {x: 0.25, y: 0.6}, {x: 0.75, y: 0.6}, {x: 0.5, y: 0.87}],
-  [{x: 0.25, y: 0.2}, {x: 0.75, y: 0.2}, {x: 0.25, y: 0.5}, {x: 0.75, y: 0.5}, {
-    x: 0.25,
-    y: 0.8
-  }, {x: 0.75, y: 0.8}],
+  [{x: 0.25, y: 0.2}, {x: 0.75, y: 0.2}, {x: 0.25, y: 0.5}, {x: 0.75, y: 0.5},
+    {x: 0.25, y: 0.8}, {x: 0.75, y: 0.8}],
 ]
+
+export interface ChangeCounterEvent {
+  player: string;
+  counter: string;
+  amount: number;
+}
+
+export interface SetCountersEvent {
+  player: string;
+  counters: { [id: string]: boolean };
+}

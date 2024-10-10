@@ -1,7 +1,7 @@
 import {Component, HostBinding, OnDestroy, OnInit} from '@angular/core';
 import {GameCounterComponent} from "../game-counter/game-counter.component";
 import {NgClass, NgFor} from "@angular/common";
-import {parseHash, Player} from "../../lib/constants";
+import {createHash, parseHash, Player} from "../../lib/constants";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {IconComponent} from "../icon/icon.component";
@@ -49,7 +49,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   visibilityChangeEvent = this.onVisibilityChange.bind(this);
 
   get shareUrl() {
-    return location.protocol + '//' + location.host + location.hash;
+    return location.protocol + '//' + location.host + "#" + createHash(this.players, this.startingLifeTotal);
   }
 
   async ngOnInit() {
@@ -81,8 +81,33 @@ export class GamePageComponent implements OnInit, OnDestroy {
     }
   }
 
+  changeCounter(player: string, counter: string, amount: number) {
+    const c = this.players.find(p => p.color == player)?.counters.find(c => c.icon == counter);
+    if (c) {
+      c.value = c.value + amount;
+    }
+  }
+
+  setCounters(player: string, counters: { [id: string]: boolean }) {
+    const p = this.players.find(p => p.color == player);
+    if (p) {
+      for (let icon of Object.keys(counters)) {
+        if (counters[icon] && !p.counters.some(c => c.icon == icon)) {
+          p.counters.push({icon, value: 0});
+        }
+        const i = p.counters.findIndex(c => c.icon == icon);
+        if (!counters[icon] && i != -1) {
+          p.counters.splice(i, 1);
+        }
+      }
+    }
+  }
+
   reset() {
-    this.players.forEach(player => player.counters[0].value = this.startingLifeTotal);
+    this.players.forEach(player => {
+      player.counters[0].value = this.startingLifeTotal;
+      player.counters.length = 1;
+    });
   }
 
   async onVisibilityChange() {

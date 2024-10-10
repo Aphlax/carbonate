@@ -30,6 +30,7 @@
   display: flex;
   flex-direction: row;
   margin: 10px 20px;
+  height: 40px;
   justify-content: space-evenly;
 }
 
@@ -39,12 +40,20 @@
 
 :host.left .additional-counters-row {
   margin: 20px 10px;
+  height: unset;
+  width: 40px;
   flex-direction: column;
 }
 
 :host.right .additional-counters-row {
   margin: 20px 10px;
+  height: unset;
+  width: 40px;
   flex-direction: column-reverse;
+}
+
+.additional-counters-row:last-child {
+  justify-content: center;
 }
 
 :host.up .additional-counters-row button {
@@ -59,23 +68,14 @@
   transform: rotate(-90deg);
 }
 
-.additional-counters-row button.active {
+.additional-counters-row button.selected {
   background-color: #02DDDDFF;
   color: black;
 }
 
 .done-button {
   align-self: center;
-}
-
-:host.left .done-button {
-  width: 40px;
-  transform: rotate(90deg);
-}
-
-:host.right .done-button {
-  width: 40px;
-  transform: rotate(-90deg);
+  margin: 30px;
 }
 
 .rotatable-container {
@@ -84,6 +84,8 @@
   left: 0;
   width: 100%;
   height: 100%;
+  transition-property: top, bottom, left, right;
+  transition-duration: 100ms;
   display: flex;
   flex-direction: row;
   align-items: stretch;

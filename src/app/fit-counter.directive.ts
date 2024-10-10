@@ -1,4 +1,5 @@
 import {
+  AfterViewChecked,
   AfterViewInit,
   Directive,
   ElementRef,
@@ -12,7 +13,7 @@ import {
   selector: '[fitCounter]',
   standalone: true
 })
-export class FitCounterDirective implements AfterViewInit, OnChanges {
+export class FitCounterDirective implements AfterViewInit, OnChanges, AfterViewChecked {
   @Input() fitCounter!: number;
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
@@ -37,6 +38,10 @@ export class FitCounterDirective implements AfterViewInit, OnChanges {
   }
 
   ngAfterViewInit(): void {
+    this.setFontSize();
+  }
+
+  ngAfterViewChecked(): void {
     this.setFontSize();
   }
 
