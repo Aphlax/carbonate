@@ -53,7 +53,7 @@ export class FitCounterDirective implements AfterViewInit, OnChanges, AfterViewC
 
     const fontWeight = this.styles.fontWeight || 'normal';
     const fontFamily = this.styles.fontFamily || 'Arial';
-    let fontSize = height - 6;
+    let fontSize = Math.min(height - 6, 180);
     this.ctx.font = `${fontWeight} ${fontSize + "px"} ${fontFamily}`;
     const expectedWidth = this.ctx.measureText(this.fitCounter.toString()).width;
     if (expectedWidth > width) {

@@ -29,7 +29,7 @@
   </button>
   <a class="exit-button" mat-stroked-button routerLink="/">Exit</a>
 </div>
-<div [ngClass]="{show: showShare}" class="menu-scrim share">
+<div [ngClass]="{show: showShare, forceHide: !showMenu}" class="menu-scrim share">
   <button (click)="showShare = false; showMenu = false;" aria-label="close" mat-icon-button>
     <mat-icon>arrow_back</mat-icon>
   </button>
@@ -43,13 +43,31 @@
           [width]="300"></qrcode>
   <button (click)="share()" class="share-button" mat-button>Share</button>
 </div>
-<div class="menu-scrim history" [ngClass]="{show: showHistory}">
+<div [ngClass]="{show: showHistory, forceHide: !showMenu}" class="menu-scrim history">
   <button mat-icon-button aria-label="close" (click)="showHistory = false; showMenu = false;">
     <mat-icon>arrow_back</mat-icon>
   </button>
   <h2 class="menu-title">History</h2>
+  <div class="history-header">
+    <div *ngFor="let player of historyHeader" class="history-row-player"
+         style="color: {{color(player.color)}}">
+      <icon *ngFor="let icon of player.counters" [icon]="icon || 'H'"
+            class="history-row-item"></icon>
+    </div>
+  </div>
+  <div class="history-contents">
+    <div *ngFor="let item of history; index as i" class="history-row">
+      <div *ngFor="let player of item.players" class="history-row-player"
+           style="color: {{color(player.color)}}">
+        <div *ngFor="let value of rowItems(player, i)" class="history-row-item">
+          {{value}}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<div [ngClass]="{show: showDice, rolling: diceResult.length}" class="menu-scrim dice">
+<div [ngClass]="{show: showDice, rolling: diceResult.length, forceHide: !showMenu}"
+     class="menu-scrim dice">
   <button mat-icon-button aria-label="close" (click)="showDice = false; showMenu = false;">
     <mat-icon>arrow_back</mat-icon>
   </button>

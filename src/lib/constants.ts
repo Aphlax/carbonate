@@ -120,3 +120,16 @@ export interface SetCountersEvent {
   player: string;
   counters: { [id: string]: boolean };
 }
+
+export const HISTORY_TIMEOUT = 3000; // 3s.
+export const HISTORY_AMEND_TIME = 17000; // 17s.
+
+export interface HistoryItem {
+  time: number,
+  players: Player[],
+}
+
+export interface HistoryHeaderItem {
+  color: string,
+  counters: string[],
+}

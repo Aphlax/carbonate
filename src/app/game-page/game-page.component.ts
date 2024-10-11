@@ -1,7 +1,16 @@
 import {Component, HostBinding, OnDestroy, OnInit} from '@angular/core';
 import {GameCounterComponent} from "../game-counter/game-counter.component";
 import {NgClass, NgFor} from "@angular/common";
-import {createHash, parseHash, Player} from "../../lib/constants";
+import {
+  COLORS,
+  createHash,
+  HISTORY_AMEND_TIME,
+  HISTORY_TIMEOUT,
+  HistoryHeaderItem,
+  HistoryItem,
+  parseHash,
+  Player
+} from "../../lib/constants";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {IconComponent} from "../icon/icon.component";
@@ -37,6 +46,9 @@ export class GamePageComponent implements OnInit, OnDestroy {
   diceMin: number = 1;
   diceMax: number = 6;
   diceResult: number[] = [];
+  history: HistoryItem[] = [];
+  historyHeader: HistoryHeaderItem[] = [];
+  historyHandle: number = 0;
 
   @HostBinding('class') get playerCount(): string {
     return "n-" + this.players.length;
@@ -56,6 +68,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
     const {players, startingLifeTotal} = parseHash(window.location.hash.slice(1));
     this.players = players;
     this.startingLifeTotal = startingLifeTotal;
+    this.addHistory(Date.now(), players);
 
     document.addEventListener('visibilitychange', this.visibilityChangeEvent);
     document.addEventListener('fullscreenchange', this.visibilityChangeEvent);
@@ -85,6 +98,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
     const c = this.players.find(p => p.color == player)?.counters.find(c => c.icon == counter);
     if (c) {
       c.value = c.value + amount;
+      this.recordHistory();
     }
   }
 
@@ -108,6 +122,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
       player.counters[0].value = this.startingLifeTotal;
       player.counters.length = 1;
     });
+    this.recordHistory();
   }
 
   async onVisibilityChange() {
@@ -133,5 +148,78 @@ export class GamePageComponent implements OnInit, OnDestroy {
         this.diceResult[i] = Math.floor(this.diceMin + Math.random() * (this.diceMax - this.diceMin + 1));
       }
     }
+  }
+
+  recordHistory() {
+    if (this.historyHandle) {
+      clearTimeout(this.historyHandle);
+    }
+    this.historyHandle = setTimeout(this.addHistory.bind(this), HISTORY_TIMEOUT, Date.now(), this.players);
+  }
+
+  addHistory(time: number, players: Player[]) {
+    this.historyHandle = 0;
+    if (this.history.length) {
+      const last = this.history[this.history.length - 1];
+      let changes = 0;
+      for (let player of players) {
+        for (let counter of player.counters) {
+          const lastPlayer = last.players.find(p => p.color == player.color);
+          const lastCounter = lastPlayer?.counters.find(c => c.icon == counter.icon);
+          if (lastCounter?.value != counter.value) {
+            changes++;
+          }
+        }
+      }
+      if (!changes) return;
+      if (time < last.time + HISTORY_AMEND_TIME) {
+        for (let player of players) {
+          for (let counter of player.counters) {
+            const lastPlayer = last.players.find(p => p.color == player.color);
+            const lastCounter = lastPlayer?.counters.find(c => c.icon == counter.icon);
+            if (lastCounter) {
+              lastCounter.value = counter.value;
+            }
+          }
+        }
+        return;
+      }
+    }
+    const pls: Player[] = [];
+    for (let player of players) {
+      pls.push({color: player.color, counters: player.counters.map(c => ({...c}))});
+      const header = this.historyHeader.find(h => h.color == player.color);
+      if (!header) {
+        this.historyHeader.push({color: player.color, counters: player.counters.map(c => c.icon)});
+        continue;
+      }
+      for (let counter of player.counters) {
+        if (!header.counters.includes(counter.icon)) {
+          header.counters.push(counter.icon);
+        }
+      }
+    }
+    this.history.push({time, players: pls});
+  }
+
+  color(colorId: string): string {
+    return COLORS.get(colorId)!;
+  }
+
+  rowItems(player: Player, historyIndex: number): string[] {
+    const header = this.historyHeader.find(p => p.color == player.color);
+    if (!header) return [];
+    const values: string[] = [];
+    for (const c of header.counters) {
+      const lastValue = this.history[historyIndex - 1]?.players
+        .find(p => p.color == player.color)?.counters.find(cc => cc.icon == c);
+      const currentValue = player.counters.find(cc => cc.icon == c);
+      if (currentValue && lastValue?.value != currentValue.value) {
+        values.push(currentValue.value.toString());
+      } else {
+        values.push('');
+      }
+    }
+    return values;
   }
 }
