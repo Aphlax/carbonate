@@ -4,26 +4,30 @@
               [player]="player"
               class="p-{{i}}">
 </game-counter>
-<button class="menu-button" (click)="showMenu = true;" matRipple [matRippleCentered]="true">
+<button (click)="showMenu = true;" [matRippleCentered]="true" class="menu-button" matRipple
+        matRippleColor="#FFFFFF40">
   <icon icon="carbonate"></icon>
 </button>
 <div class="menu-scrim" [ngClass]="{show: showMenu}">
   <button mat-icon-button aria-label="close" (click)="showMenu = false;">
     <mat-icon>arrow_back</mat-icon>
   </button>
-  <button class="menu-action share" (click)="showShare = true;" matRipple>
+  <button (click)="showShare = true;" class="menu-action share" matRipple
+          matRippleColor="#FFFFFF40">
     <icon icon="share"></icon>
     <label>share</label>
   </button>
-  <button class="menu-action reset" (click)="reset(); showMenu = false;" matRipple>
+  <button (click)="reset(); showMenu = false;" class="menu-action reset" matRipple
+          matRippleColor="#FFFFFF40">
     <icon icon="reset"></icon>
     <label>reset</label>
   </button>
-  <button class="menu-action history" (click)="showHistory = true;" matRipple>
+  <button (click)="showHistory = true; submitHistory()" class="menu-action history" matRipple
+          matRippleColor="#FFFFFF40">
     <icon icon="history" style="transform: scale(0.9)"></icon>
     <label>history</label>
   </button>
-  <button class="menu-action dice" (click)="showDice = true;" matRipple>
+  <button (click)="showDice = true;" class="menu-action dice" matRipple matRippleColor="#FFFFFF40">
     <icon icon="dice"></icon>
     <label>dice</label>
   </button>
@@ -41,26 +45,28 @@
           [margin]="4"
           [qrdata]="shareUrl"
           [width]="300"></qrcode>
-  <button (click)="share()" class="share-button" mat-button>Share</button>
+  <button (click)="share()" class="share-button" mat-stroked-button>Share</button>
 </div>
 <div [ngClass]="{show: showHistory, forceHide: !showMenu}" class="menu-scrim history">
   <button mat-icon-button aria-label="close" (click)="showHistory = false; showMenu = false;">
     <mat-icon>arrow_back</mat-icon>
   </button>
   <h2 class="menu-title">History</h2>
-  <div class="history-header">
-    <div *ngFor="let player of historyHeader" class="history-row-player"
-         style="color: {{color(player.color)}}">
-      <icon *ngFor="let icon of player.counters" [icon]="icon || 'H'"
-            class="history-row-item"></icon>
-    </div>
-  </div>
-  <div class="history-contents">
-    <div *ngFor="let item of history; index as i" class="history-row">
-      <div *ngFor="let player of item.players" class="history-row-player"
+  <div class="content">
+    <div class="history-header">
+      <div *ngFor="let player of historyHeader" class="history-row-player"
            style="color: {{color(player.color)}}">
-        <div *ngFor="let value of rowItems(player, i)" class="history-row-item">
-          {{value}}
+        <icon *ngFor="let icon of player.counters" [icon]="icon || 'H'"
+              class="history-row-item"></icon>
+      </div>
+    </div>
+    <div class="history-contents">
+      <div *ngFor="let item of history; index as i" class="history-row">
+        <div *ngFor="let player of item.players" class="history-row-player"
+             style="color: {{color(player.color)}}">
+          <div *ngFor="let value of rowItems(player, i)" class="history-row-item">
+            {{value}}
+          </div>
         </div>
       </div>
     </div>

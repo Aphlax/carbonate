@@ -157,6 +157,12 @@ export class GamePageComponent implements OnInit, OnDestroy {
     this.historyHandle = setTimeout(this.addHistory.bind(this), HISTORY_TIMEOUT, Date.now(), this.players);
   }
 
+  submitHistory() {
+    if (this.historyHandle) {
+      this.addHistory(Date.now(), this.players);
+    }
+  }
+
   addHistory(time: number, players: Player[]) {
     this.historyHandle = 0;
     if (this.history.length) {

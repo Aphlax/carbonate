@@ -1,35 +1,50 @@
 :host {
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid: 1fr 30% / 1fr;
+  grid-template-areas: "caption" "buttons";
+  justify-items: center;
   align-items: center;
-  justify-content: space-evenly;
 }
 
 .share-button {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 16px;
+  right: 16px;
 }
 
 .caption {
+  grid-area: caption;
   display: flex;
   flex-direction: column;
   align-items: center;
+  user-select: none;
+}
+
+.caption icon {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+  color: var(--theme-color);
+  transition: transform 1s ease-in-out;
+  border-radius: 60px;
 }
 
 h1 {
   margin: 0;
+  letter-spacing: 1px;
 }
 
 .buttons {
+  grid-area: buttons;
+  align-self: start;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .buttons > * {
-  margin: 8px;
+  margin-bottom: 16px;
 }
 
 .menu-scrim {

@@ -122,7 +122,7 @@ export interface SetCountersEvent {
 }
 
 export const HISTORY_TIMEOUT = 3000; // 3s.
-export const HISTORY_AMEND_TIME = 17000; // 17s.
+export const HISTORY_AMEND_TIME = 10000; // 10s.
 
 export interface HistoryItem {
   time: number,

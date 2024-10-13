@@ -1,4 +1,4 @@
-<div class="additional-counters">
+<div *ngIf="open" class="additional-counters">
   <div class="additional-counters-row">
     <button (click)="counters['X'] = !counters['X'];" [ngClass]="{selected: counters['X']}"
             mat-icon-button>
@@ -44,7 +44,9 @@
     </button>
   </div>
   <div class="additional-counters-row">
-    <button (click)="changeCounters(); open = 0;" class="done-button" mat-flat-button>Done</button>
+    <button (click)="changeCounters(); open = 0;" class="done-button" mat-flat-button>
+      Done
+    </button>
     <button (click)="open = 0;" mat-icon-button>
       <icon icon="reset"></icon>
     </button>

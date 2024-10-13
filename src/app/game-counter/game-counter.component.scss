@@ -68,14 +68,21 @@
   transform: rotate(-90deg);
 }
 
-.additional-counters-row button.selected {
-  background-color: #02DDDDFF;
-  color: black;
+.additional-counters-row button {
+  color: inherit;
 }
 
-.done-button {
+.additional-counters-row button.selected {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+}
+
+.additional-counters-row button.done-button {
   align-self: center;
   margin: 30px;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  --mat-filled-button-ripple-color: #00000040;
 }
 
 .rotatable-container {
@@ -90,7 +97,7 @@
   flex-direction: row;
   align-items: stretch;
   justify-content: stretch;
-  background-color: var(--mat-app-background-color, var(--mat-app-background, transparent));
+  background-color: var(--background-color);
   z-index: 2;
 }
 
