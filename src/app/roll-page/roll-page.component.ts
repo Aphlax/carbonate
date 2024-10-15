@@ -87,7 +87,6 @@ export class RollPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.animationHandle = window.requestAnimationFrame(this.update.bind(this));
     this.canvas.nativeElement.width = this.canvas.nativeElement.clientWidth;
     this.canvas.nativeElement.height = this.canvas.nativeElement.clientHeight;
     this.ctx = this.canvas.nativeElement.getContext('2d')!;
@@ -99,6 +98,9 @@ export class RollPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   touchStart(e: TouchEvent) {
+    if (!this.animationHandle) {
+      this.animationHandle = window.requestAnimationFrame(this.update.bind(this));
+    }
     if (this.done) return;
     this.rollStart = 0;
     for (let i = 0; i < e.changedTouches.length; i++) {

@@ -1,5 +1,5 @@
 <button (click)="showShare = true;" class="share-button" mat-icon-button>
-  <mat-icon>share</mat-icon>
+  <icon icon="share"></icon>
 </button>
 <div class="caption">
   <icon (click)="rotation = rotation + 359.95;" icon="carbonate"
@@ -10,6 +10,7 @@
 <div class="buttons">
   <a mat-flat-button routerLink="/setup">New game</a>
   <a *ngIf="gameHash" [fragment]="gameHash" mat-flat-button routerLink="/game">Continue</a>
+  <button (click)="showInstall = true" *ngIf="!isPwa" mat-stroked-button>Install</button>
 </div>
 <div [ngClass]="{show: showShare}" class="menu-scrim share">
   <button (click)="showShare = false;" aria-label="close" mat-icon-button>
@@ -24,4 +25,22 @@
           [qrdata]="shareUrl"
           [width]="300"></qrcode>
   <label>{{shareUrl}}</label>
+</div>
+<div [ngClass]="{show: showInstall}" class="menu-scrim install">
+  <h4>Android</h4>
+  <p>
+    Open the menu (
+    <mat-icon>more_vert</mat-icon>
+    ), and select
+    <b>Add&nbsp;to&nbsp;home&nbsp;screen</b>.
+  </p>
+  <h4>iOS</h4>
+  <p>
+    Open the share menu (
+    <mat-icon>ios_share</mat-icon>
+    ),
+    and select <b>Add&nbsp;to&nbsp;home&nbsp;screen&nbsp;<mat-icon>add_box_outline</mat-icon>
+  </b>.
+  </p>
+  <button (click)="showInstall = false" mat-stroked-button>Ok</button>
 </div>

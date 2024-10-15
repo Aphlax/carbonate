@@ -13,6 +13,11 @@
   right: 16px;
 }
 
+.share-button icon {
+  display: block;
+  transform: scale(1.5) translateY(1px);
+}
+
 .caption {
   grid-area: caption;
   display: flex;
@@ -53,6 +58,7 @@ h1 {
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 1;
   opacity: 0;
   visibility: hidden;
   transform: scale(0.9);
@@ -94,4 +100,38 @@ h1 {
 
 .share label {
   grid-area: 6/2/7/4;
+}
+
+.menu-scrim.install {
+  top: 50%;
+  bottom: unset;
+  left: 50%;
+  right: unset;
+  transform: translate(-50%, -50%);
+  padding: 12px;
+  width: 300px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border: 1px solid var(--primary-color);
+}
+
+.menu-scrim.install.show {
+  background-color: black;
+  backdrop-filter: none;
+}
+
+.menu-scrim.install h4 {
+  margin: 0;
+}
+
+.menu-scrim.install p {
+  margin: 4px 0 20px;
+  text-align: center;
+}
+
+.menu-scrim.install mat-icon {
+  vertical-align: middle;
 }

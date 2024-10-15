@@ -24,6 +24,7 @@ import {IconComponent} from "../icon/icon.component";
 })
 export class StartPageComponent {
   showShare = false;
+  showInstall = false;
   rotation = 0;
 
   get gameHash() {
@@ -32,5 +33,11 @@ export class StartPageComponent {
 
   get shareUrl() {
     return location.protocol + '//' + location.host;
+  }
+
+  get isPwa() {
+    return (window.matchMedia('(display-mode: fullscreen)').matches) ||
+      ((window.navigator as any).standalone) ||
+      document.referrer.includes('android-app://');
   }
 }
