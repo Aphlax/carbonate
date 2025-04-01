@@ -1,6 +1,6 @@
 import {Component, HostBinding, OnDestroy, OnInit} from '@angular/core';
 import {GameCounterComponent} from "../game-counter/game-counter.component";
-import {NgClass, NgFor} from "@angular/common";
+import {LocationStrategy, NgClass, NgFor} from "@angular/common";
 import {
   COLORS,
   createHash,
@@ -41,6 +41,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   wakeLock?: WakeLockSentinel = undefined;
   showMenu: boolean = false;
   showShare: boolean = false;
+  showReset: boolean = false;
   showHistory: boolean = false;
   showDice: boolean = false;
   diceMin: number = 1;
@@ -49,6 +50,14 @@ export class GamePageComponent implements OnInit, OnDestroy {
   history: HistoryItem[] = [];
   historyHeader: HistoryHeaderItem[] = [];
   historyHandle: number = 0;
+
+  constructor(private location: LocationStrategy) {
+    history.pushState(null, "", window.location.href);
+    this.location.onPopState(() => {
+      history.pushState(null, "", window.location.href);
+      this.showMenu = true;
+    });
+  }
 
   @HostBinding('class') get playerCount(): string {
     return "n-" + this.players.length;
@@ -206,6 +215,10 @@ export class GamePageComponent implements OnInit, OnDestroy {
       }
     }
     this.history.push({time, players: pls});
+  }
+
+  getLastHistory(color: string): Player | undefined {
+    return this.history[this.history.length - 1].players.find(pl => pl.color == color);
   }
 
   color(colorId: string): string {

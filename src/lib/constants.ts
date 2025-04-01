@@ -53,7 +53,7 @@ export function getRandomColor(used: string[]): string {
 }
 
 export const ICONS = [
-  "H"
+  "H", "X", "O", "E", "Z", "C", "W", "U", "R", "B", "G",
 ];
 
 export interface Counter {
@@ -67,8 +67,8 @@ export interface Player {
 }
 
 export const HASH_SEPARATOR = ":";
-const allColors = [...COLORS.keys()].join();
-const allIcons = ICONS.join();
+const allColors = [...COLORS.keys()].join("");
+const allIcons = ICONS.join("");
 export const HASH_PARSE_REGEX =
   new RegExp(`^([${allColors}${allIcons}0-9-]+?)(?:[${HASH_SEPARATOR}](\\d+))?$`);
 export const PLAYER_PARSE_REGEX =

@@ -55,7 +55,14 @@
 <div [style]="openStyle" class="rotatable-container {{player.color}}">
   <div class="counter" *ngFor="let counter of player.counters; index as i">
     <div [fitCounter]="counter.value" class="value">
-      {{counter.value}}
+      <span class="value-label">
+        {{counter.value}}
+      </span>
+      <div [ngClass]="{show: showDelta(counter)}" class="delta-value">
+        <span class="delta-label">
+          {{getDelta(counter)}}
+        </span>
+      </div>
     </div>
     <icon [icon]="counter.icon || 'H'" class="icon"></icon>
     <button (touchend)="touchEnd(counter.icon, 1); $event.preventDefault();"

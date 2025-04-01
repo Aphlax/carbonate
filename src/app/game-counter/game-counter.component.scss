@@ -129,7 +129,6 @@
   justify-items: center;
 
   border-radius: 20px;
-  overflow: hidden;
 }
 :host.left .counter {
   grid: 1fr 12fr 1fr / 1fr 1fr 6fr 2fr;
@@ -150,19 +149,62 @@
   grid-area: value;
   place-self: stretch;
   position: relative;
-  overflow: hidden;
 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.value-label {
+  overflow: hidden;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
   Helvetica, "Arial Narrow", Arial, "Lucida Grande", sans-serif;
   font-weight: 400;
   text-align: center;
 }
+
 :host.left .value {
   writing-mode: vertical-rl;
 }
+
 :host.right .value {
   transform: rotate(180deg);
   writing-mode: vertical-rl;
+}
+
+.delta-value {
+  position: relative;
+  width: 0;
+  height: 0;
+  z-index: 1;
+  opacity: 0;
+}
+
+.delta-value.show {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.delta-label {
+  position: absolute;
+  left: 10px;
+  transform: translateY(-50%);
+
+  color: var(--primary-color);
+  font-family: Roboto, sans-serif;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+:host.left .delta-label, :host.right .delta-label {
+  left: 0;
+  top: 10px;
+  transform: translateX(-50%);
+}
+
+:host.up .delta-label {
+  transform: translateY(-50%);
 }
 
 .icon {
@@ -170,6 +212,7 @@
   justify-self: center;
   align-self: stretch;
 }
+
 :host.left .icon {
   transform: rotate(90deg);
   justify-self: stretch;

@@ -3,7 +3,7 @@ import {MatRippleModule} from "@angular/material/core";
 import {IconComponent} from "../icon/icon.component";
 import {NgClass, NgFor, NgIf} from "@angular/common";
 import {FitCounterDirective} from "../fit-counter.directive";
-import {ChangeCounterEvent, COLORS, Player, SetCountersEvent} from "../../lib/constants";
+import {ChangeCounterEvent, COLORS, Counter, Player, SetCountersEvent} from "../../lib/constants";
 import {MatButtonModule, MatIconButton} from "@angular/material/button";
 
 interface Point {
@@ -21,6 +21,7 @@ interface Point {
 export class GameCounterComponent {
   @Input({required: true}) player!: Player;
   @Input({required: true}) @HostBinding("class") direction!: string;
+  @Input() history?: Player;
   @Output() onChangeCounter = new EventEmitter<ChangeCounterEvent>();
   @Output() onSetCounters = new EventEmitter<SetCountersEvent>();
 
@@ -96,5 +97,19 @@ export class GameCounterComponent {
 
   changeCounters() {
     this.onSetCounters.emit({player: this.player.color, counters: this.counters});
+  }
+
+  public showDelta(counter: Counter): boolean {
+    if (!this.history) return false;
+    const old = this.history.counters.find(c => c.icon == counter.icon);
+    if (!old) return false;
+    return old.value != counter.value;
+  }
+
+  public getDelta(counter: Counter): string {
+    if (!this.history) return "";
+    const old = this.history.counters.find(c => c.icon == counter.icon);
+    if (!old) return "";
+    return (old.value >= counter.value ? "" : "+") + (counter.value - old.value);
   }
 }

@@ -197,6 +197,12 @@ button.menu-button {
   grid-area: 7/2/8/4;
 }
 
+.reset-button {
+  grid-area: 3/2/6/4;
+  width: 240px;
+  height: 240px;
+}
+
 .history .content {
   grid-area: 2/1/9/5;
   place-self: stretch;

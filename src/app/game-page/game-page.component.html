@@ -1,7 +1,7 @@
 <game-counter (onChangeCounter)="changeCounter($event.player, $event.counter, $event.amount)"
               (onSetCounters)="setCounters($event.player, $event.counters)"
               *ngFor="let player of players; index as i" [direction]="getOrientation(i)"
-              [player]="player"
+              [history]="getLastHistory(player.color)" [player]="player"
               class="p-{{i}}">
 </game-counter>
 <button (click)="showMenu = true;" [matRippleCentered]="true" class="menu-button" matRipple
@@ -17,7 +17,7 @@
     <icon icon="share"></icon>
     <label>share</label>
   </button>
-  <button (click)="reset(); showMenu = false;" class="menu-action reset" matRipple
+  <button (click)="showReset = true;" class="menu-action reset" matRipple
           matRippleColor="#FFFFFF40">
     <icon icon="reset"></icon>
     <label>reset</label>
@@ -46,6 +46,17 @@
           [qrdata]="shareUrl"
           [width]="300"></qrcode>
   <button (click)="share()" class="share-button" mat-stroked-button>Share</button>
+</div>
+<div [ngClass]="{show: showReset, forceHide: !showMenu}" class="menu-scrim reset">
+  <button (click)="showReset = false; showMenu = false;" aria-label="close" mat-icon-button>
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h2 class="menu-title">Reset</h2>
+  <button (click)="reset(); showReset = false; showMenu = false;" class="reset-button menu-action"
+          matRipple matRippleColor="#FFFFFF40">
+    <icon icon="reset"></icon>
+    <label>reset</label>
+  </button>
 </div>
 <div [ngClass]="{show: showHistory, forceHide: !showMenu}" class="menu-scrim history">
   <button mat-icon-button aria-label="close" (click)="showHistory = false; showMenu = false;">
