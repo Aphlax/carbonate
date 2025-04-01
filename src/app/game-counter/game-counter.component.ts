@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostBinding, Input, Output} from '@angular/core';
+import {Component, EventEmitter, HostBinding, Input, OnInit, Output} from '@angular/core';
 import {MatRippleModule} from "@angular/material/core";
 import {IconComponent} from "../icon/icon.component";
 import {NgClass, NgFor, NgIf} from "@angular/common";
@@ -18,12 +18,17 @@ interface Point {
   templateUrl: './game-counter.component.html',
   styleUrl: './game-counter.component.scss'
 })
-export class GameCounterComponent {
+export class GameCounterComponent implements OnInit {
   @Input({required: true}) player!: Player;
   @Input({required: true}) @HostBinding("class") direction!: string;
-  @Input() history?: Player;
+  @Input({required: true}) history?: Player;
+  @Input({required: true}) showMenuEvent!: EventEmitter<void>;
   @Output() onChangeCounter = new EventEmitter<ChangeCounterEvent>();
   @Output() onSetCounters = new EventEmitter<SetCountersEvent>();
+
+  ngOnInit(): void {
+    this.showMenuEvent.subscribe(this.cancelFastChange.bind(this));
+  }
 
   @HostBinding('style.color') get color(): string {
     return COLORS.get(this.player.color)!;
@@ -97,6 +102,13 @@ export class GameCounterComponent {
 
   changeCounters() {
     this.onSetCounters.emit({player: this.player.color, counters: this.counters});
+  }
+
+  cancelFastChange() {
+    if (this.timeoutHandle) {
+      clearTimeout(this.timeoutHandle);
+      this.timeoutHandle = 0;
+    }
   }
 
   public showDelta(counter: Counter): boolean {

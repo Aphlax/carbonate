@@ -2,7 +2,7 @@
               (onSetCounters)="setCounters($event.player, $event.counters)"
               *ngFor="let player of players; index as i" [direction]="getOrientation(i)"
               [history]="getLastHistory(player.color)" [player]="player"
-              class="p-{{i}}">
+              [showMenuEvent]="showMenuEvent" class="p-{{i}}">
 </game-counter>
 <button (click)="showMenu = true;" [matRippleCentered]="true" class="menu-button" matRipple
         matRippleColor="#FFFFFF40">
