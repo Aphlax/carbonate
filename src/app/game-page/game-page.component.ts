@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostBinding, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, HostBinding, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {GameCounterComponent} from "../game-counter/game-counter.component";
 import {LocationStrategy, NgClass, NgFor} from "@angular/common";
 import {
@@ -59,6 +59,13 @@ export class GamePageComponent implements OnInit, OnDestroy {
       this.showMenuEvent.emit();
       this.showMenu = true;
     });
+  }
+
+  @HostListener('window:blur', [])
+  @HostListener('document:visibilitychange', [])
+  onBlur() {
+    // Cancel all ongoing auto changes.
+    this.showMenuEvent.emit();
   }
 
   @HostBinding('class') get playerCount(): string {
