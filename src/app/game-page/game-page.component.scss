@@ -115,8 +115,8 @@ button.menu-button {
 
   display: grid;
   grid-template: 1fr 1fr 2fr 0.6fr 2fr 0.6fr 1fr 2fr / 2fr 4fr 4fr 2fr;
-  grid-template-areas: "back title title ." ". . . ." ". share reset ." ". . . ."
-    ". history dice ." ". . . ." ". exit exit ." ". . . .";
+  grid-template-areas: "back-history title-history title-history ." "back title title ."
+    ". share reset ." ". . . ." ". history dice ." ". . . ." ". exit exit ." ". . . .";
   place-items: center;
 }
 
@@ -136,6 +136,14 @@ button.menu-button {
 
 .menu-scrim.share {
   background-color: #000000A0;
+}
+
+.back-button {
+  grid-area: back;
+}
+
+.history .back-button {
+  grid-area: back-history;
 }
 
 .menu-action {
@@ -187,6 +195,10 @@ button.menu-button {
   margin: 0;
   text-transform: uppercase;
   user-select: none;
+}
+
+.history .menu-title {
+  grid-area: title-history;
 }
 
 .share qrcode {

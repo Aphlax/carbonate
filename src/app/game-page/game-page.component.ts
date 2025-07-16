@@ -1,4 +1,13 @@
-import {Component, EventEmitter, HostBinding, HostListener, OnDestroy, OnInit} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChildren
+} from '@angular/core';
 import {GameCounterComponent} from "../game-counter/game-counter.component";
 import {LocationStrategy, NgClass, NgFor} from "@angular/common";
 import {
@@ -37,6 +46,7 @@ const ORIENTATIONS = [
 })
 export class GamePageComponent implements OnInit, OnDestroy {
   players: Player[] = [];
+  @ViewChildren(GameCounterComponent) gameCounters!: QueryList<GameCounterComponent>;
   private startingLifeTotal: number = 0;
   wakeLock?: WakeLockSentinel = undefined;
   showMenu: boolean = false;
@@ -82,6 +92,10 @@ export class GamePageComponent implements OnInit, OnDestroy {
     return location.protocol + '//' + location.host + "#" + createHash(this.players, this.startingLifeTotal);
   }
 
+  get gameHash() {
+    return createHash(this.players, this.startingLifeTotal);
+  }
+
   async ngOnInit() {
     const {players, startingLifeTotal} = parseHash(window.location.hash.slice(1));
     this.players = players;
@@ -99,6 +113,12 @@ export class GamePageComponent implements OnInit, OnDestroy {
     if (this.wakeLock) {
       await this.wakeLock.release();
       this.wakeLock = undefined;
+    }
+  }
+
+  async onVisibilityChange() {
+    if (this.wakeLock?.released && document.visibilityState == 'visible') {
+      return await this.engageWakeLock();
     }
   }
 
@@ -140,13 +160,12 @@ export class GamePageComponent implements OnInit, OnDestroy {
       player.counters[0].value = this.startingLifeTotal;
       player.counters.length = 1;
     });
+    this.gameCounters.forEach(gameCounter => {
+      for (let color in gameCounter.counters) {
+        gameCounter.counters[color] = false;
+      }
+    })
     this.recordHistory();
-  }
-
-  async onVisibilityChange() {
-    if (this.wakeLock?.released && document.visibilityState == 'visible') {
-      return await this.engageWakeLock();
-    }
   }
 
   async share() {

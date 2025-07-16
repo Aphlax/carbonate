@@ -9,7 +9,7 @@
   <icon icon="carbonate"></icon>
 </button>
 <div class="menu-scrim" [ngClass]="{show: showMenu}">
-  <button mat-icon-button aria-label="close" (click)="showMenu = false;">
+  <button (click)="showMenu = false;" class="back-button" mat-icon-button>
     <mat-icon>arrow_back</mat-icon>
   </button>
   <button (click)="showShare = true;" class="menu-action share" matRipple
@@ -31,10 +31,10 @@
     <icon icon="dice"></icon>
     <label>dice</label>
   </button>
-  <a class="exit-button" mat-stroked-button routerLink="/">Exit</a>
+  <a [fragment]="gameHash" class="exit-button" mat-stroked-button routerLink="/">Exit Game</a>
 </div>
 <div [ngClass]="{show: showShare, forceHide: !showMenu}" class="menu-scrim share">
-  <button (click)="showShare = false; showMenu = false;" aria-label="close" mat-icon-button>
+  <button (click)="showShare = false; showMenu = false;" class="back-button" mat-icon-button>
     <mat-icon>arrow_back</mat-icon>
   </button>
   <h2 class="menu-title">Share</h2>
@@ -48,7 +48,7 @@
   <button (click)="share()" class="share-button" mat-stroked-button>Share</button>
 </div>
 <div [ngClass]="{show: showReset, forceHide: !showMenu}" class="menu-scrim reset">
-  <button (click)="showReset = false; showMenu = false;" aria-label="close" mat-icon-button>
+  <button (click)="showReset = false; showMenu = false;" class="back-button" mat-icon-button>
     <mat-icon>arrow_back</mat-icon>
   </button>
   <h2 class="menu-title">Reset</h2>
@@ -59,7 +59,7 @@
   </button>
 </div>
 <div [ngClass]="{show: showHistory, forceHide: !showMenu}" class="menu-scrim history">
-  <button mat-icon-button aria-label="close" (click)="showHistory = false; showMenu = false;">
+  <button (click)="showHistory = false; showMenu = false;" class="back-button" mat-icon-button>
     <mat-icon>arrow_back</mat-icon>
   </button>
   <h2 class="menu-title">History</h2>
@@ -85,7 +85,7 @@
 </div>
 <div [ngClass]="{show: showDice, rolling: diceResult.length, forceHide: !showMenu}"
      class="menu-scrim dice">
-  <button mat-icon-button aria-label="close" (click)="showDice = false; showMenu = false;">
+  <button (click)="showDice = false; showMenu = false;" class="back-button" mat-icon-button>
     <mat-icon>arrow_back</mat-icon>
   </button>
   <h2 class="menu-title">Dice</h2>

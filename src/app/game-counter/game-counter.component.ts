@@ -1,7 +1,7 @@
 import {Component, EventEmitter, HostBinding, Input, OnInit, Output} from '@angular/core';
 import {MatRippleModule} from "@angular/material/core";
 import {IconComponent} from "../icon/icon.component";
-import {NgClass, NgFor, NgIf} from "@angular/common";
+import {NgFor, NgIf} from "@angular/common";
 import {FitCounterDirective} from "../fit-counter.directive";
 import {ChangeCounterEvent, COLORS, Counter, Player, SetCountersEvent} from "../../lib/constants";
 import {MatButtonModule, MatIconButton} from "@angular/material/button";
@@ -14,7 +14,7 @@ interface Point {
 @Component({
   selector: 'game-counter',
   standalone: true,
-  imports: [MatRippleModule, IconComponent, NgFor, NgIf, FitCounterDirective, MatIconButton, NgClass, MatButtonModule],
+  imports: [MatRippleModule, IconComponent, NgFor, NgIf, FitCounterDirective, MatIconButton, MatButtonModule],
   templateUrl: './game-counter.component.html',
   styleUrl: './game-counter.component.scss'
 })
@@ -41,7 +41,7 @@ export class GameCounterComponent implements OnInit {
   fastIncrement: boolean = false;
   touchPoint?: Point;
   timeoutHandle: number = 0;
-  counters: { [id: string]: boolean } = {};
+  public counters: { [id: string]: boolean } = {};
   open: number = 0;
 
   get openStyle() {

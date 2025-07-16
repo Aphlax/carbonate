@@ -1,44 +1,44 @@
 <div *ngIf="open" class="additional-counters">
   <div class="additional-counters-row">
-    <button (click)="counters['X'] = !counters['X'];" [ngClass]="{selected: counters['X']}"
+    <button (click)="counters['X'] = !counters['X'];" [class.selected]="counters['X']"
             mat-icon-button>
       <icon icon="X"></icon>
     </button>
-    <button (click)="counters['O'] = !counters['O'];" [ngClass]="{selected: counters['O']}"
+    <button (click)="counters['O'] = !counters['O'];" [class.selected]="counters['O']"
             mat-icon-button>
       <icon icon="O"></icon>
     </button>
-    <button (click)="counters['E'] = !counters['E'];" [ngClass]="{selected: counters['E']}"
+    <button (click)="counters['E'] = !counters['E'];" [class.selected]="counters['E']"
             mat-icon-button>
       <icon icon="E"></icon>
     </button>
-    <button (click)="counters['Z'] = !counters['Z'];" [ngClass]="{selected: counters['Z']}"
+    <button (click)="counters['Z'] = !counters['Z'];" [class.selected]="counters['Z']"
             mat-icon-button>
       <icon icon="Z"></icon>
     </button>
-    <button (click)="counters['C'] = !counters['C'];" [ngClass]="{selected: counters['C']}"
+    <button (click)="counters['C'] = !counters['C'];" [class.selected]="counters['C']"
             mat-icon-button>
       <icon icon="C"></icon>
     </button>
   </div>
   <div class="additional-counters-row">
-    <button (click)="counters['W'] = !counters['W'];" [ngClass]="{selected: counters['W']}"
+    <button (click)="counters['W'] = !counters['W'];" [class.selected]="counters['W']"
             mat-icon-button>
       <icon icon="W"></icon>
     </button>
-    <button (click)="counters['U'] = !counters['U'];" [ngClass]="{selected: counters['U']}"
+    <button (click)="counters['U'] = !counters['U'];" [class.selected]="counters['U']"
             mat-icon-button>
       <icon icon="U"></icon>
     </button>
-    <button (click)="counters['R'] = !counters['R'];" [ngClass]="{selected: counters['R']}"
+    <button (click)="counters['R'] = !counters['R'];" [class.selected]="counters['R']"
             mat-icon-button>
       <icon icon="R"></icon>
     </button>
-    <button (click)="counters['B'] = !counters['B'];" [ngClass]="{selected: counters['B']}"
+    <button (click)="counters['B'] = !counters['B'];" [class.selected]="counters['B']"
             mat-icon-button>
       <icon icon="B"></icon>
     </button>
-    <button (click)="counters['G'] = !counters['G'];" [ngClass]="{selected: counters['G']}"
+    <button (click)="counters['G'] = !counters['G'];" [class.selected]="counters['G']"
             mat-icon-button>
       <icon icon="G"></icon>
     </button>
@@ -58,7 +58,7 @@
       <span class="value-label">
         {{counter.value}}
       </span>
-      <div [ngClass]="{show: showDelta(counter)}" class="delta-value">
+      <div [class.show]="showDelta(counter)" class="delta-value">
         <span class="delta-label">
           {{getDelta(counter)}}
         </span>
