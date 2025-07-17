@@ -1,14 +1,15 @@
-<div *ngIf="open" class="additional-counters">
-  <div class="additional-counters-row">
-    <button (click)="counters['X'] = !counters['X'];" [class.selected]="counters['X']"
-            mat-icon-button>
-      <icon icon="X"></icon>
-    </button>
-    <button (click)="counters['O'] = !counters['O'];" [class.selected]="counters['O']"
-            mat-icon-button>
-      <icon icon="O"></icon>
-    </button>
-    <button (click)="counters['E'] = !counters['E'];" [class.selected]="counters['E']"
+@if (open) {
+<div class="additional-counters">
+<div class="additional-counters-row">
+<button (click)="counters['X'] = !counters['X'];" [class.selected]="counters['X']"
+mat-icon-button>
+<icon icon="X"></icon>
+</button>
+<button (click)="counters['O'] = !counters['O'];" [class.selected]="counters['O']"
+mat-icon-button>
+<icon icon="O"></icon>
+</button>
+<button (click)="counters['E'] = !counters['E'];" [class.selected]="counters['E']"
             mat-icon-button>
       <icon icon="E"></icon>
     </button>
@@ -52,6 +53,7 @@
     </button>
   </div>
 </div>
+}
 <div [style]="openStyle" class="rotatable-container {{player.color}}">
   <div class="counter" *ngFor="let counter of player.counters; index as i">
     <div [fitCounter]="counter.value" class="value">

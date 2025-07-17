@@ -9,7 +9,7 @@ import {
   ViewChildren
 } from '@angular/core';
 import {GameCounterComponent} from "../game-counter/game-counter.component";
-import {LocationStrategy, NgClass, NgFor} from "@angular/common";
+import {LocationStrategy, NgFor} from "@angular/common";
 import {
   COLORS,
   createHash,
@@ -26,6 +26,7 @@ import {IconComponent} from "../icon/icon.component";
 import {RouterLink} from "@angular/router";
 import {MatRippleModule} from "@angular/material/core";
 import {QRCodeModule} from "angularx-qrcode";
+import {animate, style, transition, trigger} from "@angular/animations";
 
 const ORIENTATIONS = [
   ["down"],
@@ -36,13 +37,22 @@ const ORIENTATIONS = [
   ["left", "right", "left", "right", "left", "right"],
 ];
 
+const menuVisible = style({opacity: 1, transform: 'scale(1)'});
+const menuHidden = style({opacity: 0, transform: 'scale(0.9)'});
+
 @Component({
   selector: 'game-page',
   host: {'class': 'page'},
   standalone: true,
-  imports: [GameCounterComponent, NgFor, MatButtonModule, IconComponent, NgClass, MatIcon, RouterLink, MatRippleModule, QRCodeModule],
+  imports: [GameCounterComponent, NgFor, MatButtonModule, IconComponent, MatIcon, RouterLink, MatRippleModule, QRCodeModule],
   templateUrl: './game-page.component.html',
-  styleUrl: './game-page.component.scss'
+  styleUrl: './game-page.component.scss',
+  animations: [
+    trigger('menu', [
+      transition(':enter', [menuHidden, animate('180ms', menuVisible)]),
+      transition(':leave', [animate('180ms', menuHidden)]),
+    ])
+  ],
 })
 export class GamePageComponent implements OnInit, OnDestroy {
   players: Player[] = [];

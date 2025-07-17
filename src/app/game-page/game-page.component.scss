@@ -107,31 +107,14 @@ button.menu-button {
   left: 0;
   right: 0;
   z-index: 4;
-  opacity: 0;
-  visibility: hidden;
-  transform: scale(0.9);
-  pointer-events: none;
-  transition: all 180ms, display step-end 180ms;
+  background-color: #00000088;
+  backdrop-filter: blur(10px);
 
   display: grid;
   grid-template: 1fr 1fr 2fr 0.6fr 2fr 0.6fr 1fr 2fr / 2fr 4fr 4fr 2fr;
   grid-template-areas: "back-history title-history title-history ." "back title title ."
     ". share reset ." ". . . ." ". history dice ." ". . . ." ". exit exit ." ". . . .";
   place-items: center;
-}
-
-.menu-scrim.show {
-  opacity: 1;
-  visibility: visible;
-  transform: scale(1);
-  pointer-events: all;
-  background-color: #00000088;
-  backdrop-filter: blur(10px);
-  transition: all 180ms, display step-start 180ms;
-}
-
-.menu-scrim.forceHide {
-  display: none;
 }
 
 .menu-scrim.share {
