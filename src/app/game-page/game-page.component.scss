@@ -205,6 +205,7 @@ button.menu-button {
   flex-direction: column;
   align-items: stretch;
   overflow: auto;
+  overscroll-behavior-y: contain;
 }
 
 .history .history-header {
