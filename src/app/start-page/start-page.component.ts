@@ -1,10 +1,9 @@
 import {Component} from '@angular/core';
-import {RouterLink} from "@angular/router";
 import {MatButtonModule} from "@angular/material/button";
-import {NgClass, NgIf} from "@angular/common";
-import {MatIcon} from "@angular/material/icon";
 import {QRCodeModule} from "angularx-qrcode";
 import {IconComponent} from "../icon/icon.component";
+import {RouterLink} from "@angular/router";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'start-page',
@@ -12,11 +11,9 @@ import {IconComponent} from "../icon/icon.component";
   standalone: true,
   imports: [
     MatButtonModule,
-    RouterLink,
-    NgIf,
-    NgClass,
-    MatIcon,
     QRCodeModule,
+    RouterLink,
+    MatIcon,
     IconComponent,
   ],
   templateUrl: './start-page.component.html',
