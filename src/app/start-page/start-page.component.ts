@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
+import {RouterLink} from "@angular/router";
 import {MatButtonModule} from "@angular/material/button";
+import {MatIcon} from "@angular/material/icon";
 import {QRCodeModule} from "angularx-qrcode";
 import {IconComponent} from "../icon/icon.component";
-import {RouterLink} from "@angular/router";
-import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'start-page',
