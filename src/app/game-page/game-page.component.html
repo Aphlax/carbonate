@@ -9,123 +9,124 @@
   <icon icon="carbonate"></icon>
 </button>
 @if (showMenu) {
-<div class="menu-scrim" @menu>
-<button mat-icon-button class="back-button" (click)="showMenu = false;">
-<mat-icon>arrow_back</mat-icon>
-</button>
-<button class="menu-action share" (click)="showShare = true;" matRipple
-matRippleColor="#FFFFFF40">
-<icon icon="share"></icon>
-<label>share</label>
-</button>
-<button class="menu-action reset" (click)="showReset = true;" matRipple
-matRippleColor="#FFFFFF40">
-<icon icon="reset"></icon>
-<label>reset</label>
-</button>
-<button class="menu-action history" (click)="showHistory = true; submitHistory()" matRipple
-matRippleColor="#FFFFFF40">
-<icon icon="history" style="transform: scale(0.9)"></icon>
-<label>history</label>
-</button>
-<button class="menu-action dice" (click)="showDice = true;" matRipple matRippleColor="#FFFFFF40">
-<icon icon="dice"></icon>
-<label>dice</label>
-</button>
-<a [fragment]="gameHash" class="exit-button" mat-stroked-button routerLink="/">Exit Game</a>
-</div>
+  <div class="menu-scrim" @menu>
+    <button mat-icon-button class="back-button" (click)="showMenu = false;">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <button class="menu-action share" (click)="showShare = true;" matRipple
+            matRippleColor="#FFFFFF40">
+      <icon icon="share"></icon>
+      <label>share</label>
+    </button>
+    <button class="menu-action reset" (click)="showReset = true;" matRipple
+            matRippleColor="#FFFFFF40">
+      <icon icon="reset"></icon>
+      <label>reset</label>
+    </button>
+    <button class="menu-action history" (click)="showHistory = true; submitHistory()" matRipple
+            matRippleColor="#FFFFFF40">
+      <icon icon="history" style="transform: scale(0.9)"></icon>
+      <label>history</label>
+    </button>
+    <button class="menu-action dice" (click)="showDice = true;" matRipple
+            matRippleColor="#FFFFFF40">
+      <icon icon="dice"></icon>
+      <label>dice</label>
+    </button>
+    <a [fragment]="gameHash" class="exit-button" mat-stroked-button routerLink="/">Exit Game</a>
+  </div>
 }
 @if (showShare) {
-<div class="menu-scrim share" @menu>
-<button mat-icon-button class="back-button" (click)="showShare = false; showMenu = false;">
-<mat-icon>arrow_back</mat-icon>
-</button>
-<h2 class="menu-title">Share</h2>
-<qrcode [colorDark]="'#ffffffff'"
-[colorLight]="'#00000000'"
-[elementType]="'svg'"
-[errorCorrectionLevel]="'M'"
-[margin]="4"
-[qrdata]="shareUrl"
-[width]="300"></qrcode>
-<button mat-stroked-button class="share-button" (click)="share()">Share</button>
-</div>
+  <div class="menu-scrim share" @menu>
+    <button mat-icon-button class="back-button" (click)="showShare = false; showMenu = false;">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2 class="menu-title">Share</h2>
+    <qrcode [colorDark]="'#ffffffff'"
+            [colorLight]="'#00000000'"
+            [elementType]="'svg'"
+            [errorCorrectionLevel]="'M'"
+            [margin]="4"
+            [qrdata]="shareUrl"
+            [width]="300"></qrcode>
+    <button mat-stroked-button class="share-button" (click)="share()">Share</button>
+  </div>
 }
 @if (showReset) {
-<div class="menu-scrim reset" @menu>
-<button mat-icon-button class="back-button" (click)="showReset = false; showMenu = false;">
-<mat-icon>arrow_back</mat-icon>
-</button>
-<h2 class="menu-title">Reset</h2>
-<button (click)="reset(); showReset = false; showMenu = false;" class="reset-button menu-action"
-matRipple matRippleColor="#FFFFFF40">
-<icon icon="reset"></icon>
-<label>reset</label>
-</button>
-</div>
+  <div class="menu-scrim reset" @menu>
+    <button mat-icon-button class="back-button" (click)="showReset = false; showMenu = false;">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2 class="menu-title">Reset</h2>
+    <button (click)="reset(); showReset = false; showMenu = false;" class="reset-button menu-action"
+            matRipple matRippleColor="#FFFFFF40">
+      <icon icon="reset"></icon>
+      <label>reset</label>
+    </button>
+  </div>
 }
 @if (showHistory) {
-<div class="menu-scrim history" @menu>
-<button mat-icon-button class="back-button" (click)="showHistory = false; showMenu = false;">
-<mat-icon>arrow_back</mat-icon>
-</button>
-<h2 class="menu-title">History</h2>
-<div class="content">
-<div class="history-header">
-<div *ngFor="let player of historyHeader" class="history-row-player"
-style="color: {{color(player.color)}}">
-<icon *ngFor="let icon of player.counters" [icon]="icon || 'H'"
-class="history-row-item"></icon>
-</div>
+  <div class="menu-scrim history" @menu>
+    <button mat-icon-button class="back-button" (click)="showHistory = false; showMenu = false;">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2 class="menu-title">History</h2>
+    <div class="content">
+      <div class="history-header">
+        <div *ngFor="let player of historyHeader" class="history-row-player"
+             style="color: {{color(player.color)}}">
+          <icon *ngFor="let icon of player.counters" [icon]="icon || 'H'"
+                class="history-row-item"></icon>
+        </div>
+      </div>
+      <div class="history-contents">
+        <div *ngFor="let item of history; index as i" class="history-row">
+          <div *ngFor="let player of item.players" class="history-row-player"
+               style="color: {{color(player.color)}}">
+            <div *ngFor="let value of rowItems(player, i)" class="history-row-item">
+              {{ value }}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="history-contents">
-      <div *ngFor="let item of history; index as i" class="history-row">
-<div *ngFor="let player of item.players" class="history-row-player"
-style="color: {{color(player.color)}}">
-<div *ngFor="let value of rowItems(player, i)" class="history-row-item">
-{{value}}
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+  </div>
 }
 @if (showDice) {
-<div class="menu-scrim dice" @menu [class.rolling]="diceResult.length">
-<button mat-icon-button class="back-button" (click)="showDice = false; showMenu = false;">
-<mat-icon>arrow_back</mat-icon>
-</button>
-<h2 class="menu-title">Dice</h2>
-<div class="dice-setting minimum">
-<button mat-icon-button (click)="diceMin = diceMin - 1;">
-<mat-icon>remove</mat-icon>
-</button>
-<label>{{diceMin}}</label>
-<button mat-icon-button (click)="diceMin = diceMin + 1;" [disabled]="diceMin >= diceMax">
-<mat-icon>add</mat-icon>
-</button>
-</div>
-<div class="dice-result-container">
-<div *ngFor="let value of diceResult; index as i" class="dice-result"
-style="animation-delay: {{i * 100}}ms;">
-{{value}}
-</div>
-</div>
-<button mat-flat-button class="dice-roll" (click)="throwDice()">
-Roll
-</button>
-<button mat-icon-button (click)="diceResult = [];" class="dice-reset">
-<icon icon="reset"></icon>
-</button>
-<div class="dice-setting maximum">
-<button mat-icon-button (click)="diceMax = diceMax - 1;" [disabled]="diceMin >= diceMax">
-<mat-icon>remove</mat-icon>
-</button>
-<label>{{diceMax}}</label>
-<button mat-icon-button (click)="diceMax = diceMax + 1;">
-<mat-icon>add</mat-icon>
-</button>
-</div>
-</div>
+  <div class="menu-scrim dice" @menu [class.rolling]="diceResult.length">
+    <button mat-icon-button class="back-button" (click)="showDice = false; showMenu = false;">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2 class="menu-title">Dice</h2>
+    <div class="dice-setting minimum">
+      <button mat-icon-button (click)="diceMin = diceMin - 1;">
+        <mat-icon>remove</mat-icon>
+      </button>
+      <label>{{ diceMin }}</label>
+      <button mat-icon-button (click)="diceMin = diceMin + 1;" [disabled]="diceMin >= diceMax">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div class="dice-result-container">
+      <div *ngFor="let value of diceResult; index as i" class="dice-result"
+           style="animation-delay: {{i * 100}}ms;">
+        {{ value }}
+      </div>
+    </div>
+    <button mat-flat-button class="dice-roll" (click)="throwDice()">
+      Roll
+    </button>
+    <button mat-icon-button (click)="diceResult = [];" class="dice-reset">
+      <icon icon="reset"></icon>
+    </button>
+    <div class="dice-setting maximum">
+      <button mat-icon-button (click)="diceMax = diceMax - 1;" [disabled]="diceMin >= diceMax">
+        <mat-icon>remove</mat-icon>
+      </button>
+      <label>{{ diceMax }}</label>
+      <button mat-icon-button (click)="diceMax = diceMax + 1;">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
 }

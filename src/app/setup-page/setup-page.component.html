@@ -61,4 +61,5 @@
   </div>
 </div>
 <a class="continue" routerLink="/game" [fragment]="gameHash" *ngIf="players == 1" mat-flat-button>Play</a>
-<a class="continue" routerLink="/roll" fragment="{{players}}:{{life}}" *ngIf="players != 1" mat-flat-button>Next</a>
+<a *ngIf="players != 1" class="continue" fragment="{{players}}:{{life}}" mat-flat-button
+   routerLink="/roll">Next</a>
