@@ -12,8 +12,8 @@
   @if (gameHash) {
     <a mat-flat-button routerLink="/game" [fragment]="gameHash">Continue</a>
   }
-  @if (!isPwa) {
-    <button mat-stroked-button (click)="showInstall = true">Install</button>
+  @if (installPrompt || !isPwa) {
+    <button mat-stroked-button (click)="install()">Install</button>
   }
 </div>
 <div [class.show]="showShare" class="menu-scrim share">

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
@@ -19,9 +19,10 @@ import {IconComponent} from "../icon/icon.component";
   templateUrl: './start-page.component.html',
   styleUrl: './start-page.component.scss'
 })
-export class StartPageComponent {
+export class StartPageComponent implements OnInit {
   showShare = false;
   showInstall = false;
+  installPrompt?: any;
   rotation = 0;
 
   get gameHash() {
@@ -36,5 +37,26 @@ export class StartPageComponent {
     return (window.matchMedia('(display-mode: fullscreen)').matches) ||
       ((window.navigator as any).standalone) ||
       document.referrer.includes('android-app://');
+  }
+
+  ngOnInit(): void {
+    window.addEventListener('beforeinstallprompt', e => {
+      this.installPrompt = e;
+      e.preventDefault();
+    });
+    window.addEventListener('appinstalled', () => this.installPrompt = undefined);
+  }
+
+  install() {
+    if (!this.installPrompt) {
+      this.showInstall = true;
+      return;
+    }
+    this.installPrompt.prompt();
+    this.installPrompt.userChoice.then((result: string) => {
+      if (result == "accepted") {
+        this.installPrompt = undefined;
+      }
+    });
   }
 }
