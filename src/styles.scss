@@ -37,51 +37,7 @@ body {
 }
 
 .page {
-  view-transition-name: page-left;
-}
-
-@keyframes view-transition-left-out {
-  to {
-    transform: translateX(-100vw);
-  }
-}
-
-@keyframes view-transition-left-in {
-  from {
-    transform: translateX(100vw);
-  }
-}
-
-@keyframes view-transition-right-out {
-  to {
-    transform: translateX(100vw);
-  }
-}
-
-@keyframes view-transition-right-in {
-  from {
-    transform: translateX(-100vw);
-  }
-}
-
-::view-transition-new(page-left), ::view-transition-old(page-left),
-::view-transition-new(page-right), ::view-transition-old(page-right) {
-  animation-duration: 180ms;
-  animation-timing-function: ease-in-out;
-}
-
-::view-transition-new(page-left) {
-  animation-name: view-transition-left-in;
-}
-
-::view-transition-old(page-left) {
-  animation-name: view-transition-left-out;
-}
-
-::view-transition-new(page-right) {
-  animation-name: view-transition-right-in;
-}
-
-::view-transition-old(page-right) {
-  animation-name: view-transition-right-out;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }

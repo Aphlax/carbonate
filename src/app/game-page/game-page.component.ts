@@ -9,7 +9,7 @@ import {
   ViewChildren
 } from '@angular/core';
 import {GameCounterComponent} from "../game-counter/game-counter.component";
-import {LocationStrategy, NgFor} from "@angular/common";
+import {LocationStrategy} from "@angular/common";
 import {
   COLORS,
   createHash,
@@ -44,7 +44,7 @@ const menuHidden = style({opacity: 0, transform: 'scale(0.9)'});
   selector: 'game-page',
   host: {'class': 'page'},
   standalone: true,
-  imports: [GameCounterComponent, NgFor, MatButtonModule, IconComponent, MatIcon, RouterLink, MatRippleModule, QRCodeModule],
+  imports: [GameCounterComponent, MatButtonModule, IconComponent, MatIcon, RouterLink, MatRippleModule, QRCodeModule],
   templateUrl: './game-page.component.html',
   styleUrl: './game-page.component.scss',
   animations: [
@@ -55,6 +55,7 @@ const menuHidden = style({opacity: 0, transform: 'scale(0.9)'});
   ],
 })
 export class GamePageComponent implements OnInit, OnDestroy {
+  public readonly pageIndex = 3;
   players: Player[] = [];
   @ViewChildren(GameCounterComponent) gameCounters!: QueryList<GameCounterComponent>;
   private startingLifeTotal: number = 0;

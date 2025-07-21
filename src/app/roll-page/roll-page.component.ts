@@ -55,6 +55,7 @@ function getCircleRadius(t: number, winner: boolean): number {
   styleUrl: './roll-page.component.scss'
 })
 export class RollPageComponent implements OnInit, AfterViewInit, OnDestroy {
+  public readonly pageIndex = 2;
   randomColors: string[] = [];
   players!: number;
   life!: number;
@@ -87,9 +88,11 @@ export class RollPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.canvas.nativeElement.width = this.canvas.nativeElement.clientWidth;
-    this.canvas.nativeElement.height = this.canvas.nativeElement.clientHeight;
-    this.ctx = this.canvas.nativeElement.getContext('2d')!;
+    setTimeout(() => {
+      this.canvas.nativeElement.width = this.canvas.nativeElement.clientWidth;
+      this.canvas.nativeElement.height = this.canvas.nativeElement.clientHeight;
+      this.ctx = this.canvas.nativeElement.getContext('2d')!;
+    }, 0);
   }
 
   ngOnDestroy(): void {
@@ -141,7 +144,6 @@ export class RollPageComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.done && !this.touches.length) {
       this.router.navigate(["/game"], {fragment: this.gameHash});
     }
-    e.preventDefault();
   }
 
   private update(time: number) {

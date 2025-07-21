@@ -20,6 +20,7 @@ import {IconComponent} from "../icon/icon.component";
   styleUrl: './start-page.component.scss'
 })
 export class StartPageComponent implements OnInit {
+  public readonly pageIndex = 0;
   showShare = false;
   showInstall = false;
   installPrompt?: any;

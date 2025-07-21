@@ -1,9 +1,10 @@
-<game-counter (onChangeCounter)="changeCounter($event.player, $event.counter, $event.amount)"
-              (onSetCounters)="setCounters($event.player, $event.counters)"
-              *ngFor="let player of players; index as i" [direction]="getOrientation(i)"
-              [history]="getLastHistory(player.color)" [player]="player"
-              [showMenuEvent]="showMenuEvent" class="p-{{i}}">
-</game-counter>
+@for (player of players; track $index) {
+  <game-counter (onChangeCounter)="changeCounter($event.player, $event.counter, $event.amount)"
+                (onSetCounters)="setCounters($event.player, $event.counters)"
+                [direction]="getOrientation($index)" [history]="getLastHistory(player.color)"
+                [player]="player" [showMenuEvent]="showMenuEvent" class="p-{{$index}}">
+  </game-counter>
+}
 <button (click)="showMenu = true;" [matRippleCentered]="true" class="menu-button" matRipple
         matRippleColor="#FFFFFF40">
   <icon icon="carbonate"></icon>
@@ -33,7 +34,7 @@
       <icon icon="dice"></icon>
       <label>dice</label>
     </button>
-    <a [fragment]="gameHash" class="exit-button" mat-stroked-button routerLink="/">Exit Game</a>
+    <a mat-stroked-button class="exit-button" routerLink="/" [fragment]="gameHash">Exit Game</a>
   </div>
 }
 @if (showShare) {
@@ -73,28 +74,34 @@
     <h2 class="menu-title">History</h2>
     <div class="content">
       <div class="history-header">
-        <div *ngFor="let player of historyHeader" class="history-row-player"
-             style="color: {{color(player.color)}}">
-          <icon *ngFor="let icon of player.counters" [icon]="icon || 'H'"
-                class="history-row-item"></icon>
-        </div>
+        @for (player of historyHeader; track $index) {
+          <div class="history-row-player" [style.color]="color(player.color)">
+            @for (icon of player.counters; track $index) {
+              <icon [icon]="icon || 'H'" class="history-row-item"></icon>
+            }
+          </div>
+        }
       </div>
       <div class="history-contents">
-        <div *ngFor="let item of history; index as i" class="history-row">
-          <div *ngFor="let player of item.players" class="history-row-player"
-               style="color: {{color(player.color)}}">
-            <div *ngFor="let value of rowItems(player, i)" class="history-row-item">
-              {{ value }}
-            </div>
+        @for (item of history; track $index; let i = $index) {
+          <div class="history-row">
+            @for (player of item.players; track $index) {
+              <div class="history-row-player" [style.color]="color(player.color)">
+                @for (value of rowItems(player, i); track $index) {
+                  <div class="history-row-item">{{ value }}</div>
+                }
+              </div>
+            }
           </div>
-        </div>
+        }
       </div>
     </div>
   </div>
 }
 @if (showDice) {
   <div class="menu-scrim dice" @menu [class.rolling]="diceResult.length">
-    <button mat-icon-button class="back-button" (click)="showDice = false; showMenu = false;">
+    <button mat-icon-button class="back-button"
+            (click)="showDice = false; showMenu = false; diceResult = [];">
       <mat-icon>arrow_back</mat-icon>
     </button>
     <h2 class="menu-title">Dice</h2>
@@ -108,10 +115,11 @@
       </button>
     </div>
     <div class="dice-result-container">
-      <div *ngFor="let value of diceResult; index as i" class="dice-result"
-           style="animation-delay: {{i * 100}}ms;">
-        {{ value }}
-      </div>
+      @for (value of diceResult; track $index) {
+        <div class="dice-result" [style.animation-delay]="$index * 100 + 'ms'">
+          {{ value }}
+        </div>
+      }
     </div>
     <button mat-flat-button class="dice-roll" (click)="throwDice()">
       Roll

@@ -45,41 +45,42 @@
       </button>
     </div>
     <div class="additional-counters-row">
-      <button (click)="changeCounters(); open = 0;" class="done-button" mat-flat-button>
+      <button mat-flat-button (click)="changeCounters(); open = 0;" class="done-button">
         Done
-      </button>
-      <button (click)="open = 0;" mat-icon-button>
-        <icon icon="reset"></icon>
       </button>
     </div>
   </div>
 }
 <div [style]="openStyle" class="rotatable-container {{player.color}}">
-  <div class="counter" *ngFor="let counter of player.counters; index as i">
-    <div [fitCounter]="counter.value" class="value">
-      <span class="value-label">
-        {{ counter.value }}
-      </span>
-      <div [class.show]="showDelta(counter)" class="delta-value">
-        <span class="delta-label">
-          {{ getDelta(counter) }}
+  @for (counter of player.counters; track $index) {
+    <div class="counter">
+      <div [fitCounter]="counter.value" class="value">
+        <span class="value-label">
+          {{ counter.value }}
         </span>
+        @if (showDelta(counter)) {
+          <div @fade class="delta-value">
+            <span class="delta-label">
+              {{ getDelta(counter) }}
+            </span>
+          </div>
+        }
       </div>
+      <icon [icon]="counter.icon || 'H'" class="icon"></icon>
+      <button matRipple
+              [matRippleColor]="rippleColor"
+              [matRippleCentered]="false"
+              (touchstart)="touchStart(counter.icon, 1, $event); $event.preventDefault();"
+              (touchmove)="touchMove($event); $event.preventDefault();"
+              (touchend)="touchEnd(counter.icon, 1); $event.preventDefault();"
+              class="increase-button"></button>
+      <button matRipple
+              [matRippleColor]="rippleColor"
+              [matRippleCentered]="false"
+              (touchstart)="touchStart(counter.icon, -1, $event); $event.preventDefault();"
+              (touchmove)="touchMove($event); $event.preventDefault();"
+              (touchend)="touchEnd(counter.icon, -1); $event.preventDefault();"
+              class="decrease-button"></button>
     </div>
-    <icon [icon]="counter.icon || 'H'" class="icon"></icon>
-    <button (touchend)="touchEnd(counter.icon, 1); $event.preventDefault();"
-            matRipple
-            [matRippleColor]="rippleColor"
-            [matRippleCentered]="false"
-            (touchstart)="touchStart(counter.icon, 1, $event); $event.preventDefault();"
-            (touchmove)="touchMove($event); $event.preventDefault();"
-            class="increase-button"></button>
-    <button (touchend)="touchEnd(counter.icon, -1); $event.preventDefault();"
-            matRipple
-            [matRippleColor]="rippleColor"
-            [matRippleCentered]="false"
-            (touchstart)="touchStart(counter.icon, -1, $event); $event.preventDefault();"
-            (touchmove)="touchMove($event); $event.preventDefault();"
-            class="decrease-button"></button>
-  </div>
+  }
 </div>

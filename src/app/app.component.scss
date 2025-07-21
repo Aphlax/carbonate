@@ -1,9 +1,6 @@
-:host {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+:host, .content {
+  position: absolute;
   width: 100%;
   height: 100%;
-  margin: 0;
   overflow: hidden;
 }

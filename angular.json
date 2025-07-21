@@ -36,7 +36,10 @@
               "src/styles.scss",
               "src/m3-theme.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "node_modules/angularx-qrcode/fesm2022/angularx-qrcode.mjs"
+            ]
           },
           "configurations": {
             "production": {

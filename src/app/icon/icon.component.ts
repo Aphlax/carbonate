@@ -1,12 +1,9 @@
 import {Component, Input} from '@angular/core';
-import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'icon',
   standalone: true,
-    imports: [
-      NgIf,
-    ],
+    imports: [],
   templateUrl: './icon.component.html',
   styleUrl: './icon.component.scss'
 })

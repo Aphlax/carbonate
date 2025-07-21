@@ -4,7 +4,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {RouterLink} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {COLORS, HASH_SEPARATOR} from "../../lib/constants";
-import {CommonModule, NgIf} from "@angular/common";
+import {CommonModule} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
 
 @Component({
@@ -18,13 +18,13 @@ import {MatIconModule} from "@angular/material/icon";
     MatIconModule,
     RouterLink,
     FormsModule,
-    NgIf,
     CommonModule,
   ],
   templateUrl: './setup-page.component.html',
   styleUrl: './setup-page.component.scss'
 })
 export class SetupPageComponent implements OnInit {
+  public readonly pageIndex = 1;
   randomColor = [...COLORS.keys()][Math.floor(Math.random() * COLORS.size)];
   players: number = 4;
   life: number = 40;
