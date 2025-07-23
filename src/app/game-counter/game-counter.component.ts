@@ -1,7 +1,6 @@
 import {Component, EventEmitter, HostBinding, Input, OnInit, Output} from '@angular/core';
 import {MatRippleModule} from "@angular/material/core";
 import {IconComponent} from "../icon/icon.component";
-import {NgFor} from "@angular/common";
 import {FitCounterDirective} from "../fit-counter.directive";
 import {ChangeCounterEvent, COLORS, Counter, Player, SetCountersEvent} from "../../lib/constants";
 import {MatButtonModule, MatIconButton} from "@angular/material/button";
@@ -15,13 +14,13 @@ interface Point {
 @Component({
   selector: 'game-counter',
   standalone: true,
-  imports: [MatRippleModule, IconComponent, NgFor, FitCounterDirective, MatIconButton, MatButtonModule],
+  imports: [MatRippleModule, IconComponent, FitCounterDirective, MatIconButton, MatButtonModule],
   templateUrl: './game-counter.component.html',
   styleUrl: './game-counter.component.scss',
   animations: [
     trigger('fade', [
-      transition(':enter', [style({opacity: 0}), animate('0.3s ease-in-out', style({opacity: 1}))]),
-      transition(':leave', [animate('0.3s ease-in-out', style({opacity: 0}))]),
+      transition(':enter', [style({opacity: 0}), animate('0.18s ease-in-out', style({opacity: 1}))]),
+      transition(':leave', [animate('0.18s ease-in-out', style({opacity: 0}))]),
     ]),
   ],
 })

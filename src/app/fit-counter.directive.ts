@@ -15,13 +15,15 @@ import {
 })
 export class FitCounterDirective implements AfterViewInit, OnChanges, AfterViewChecked {
   @Input() fitCounter!: number;
-  private canvas: HTMLCanvasElement;
+  private static canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
   private styles: CSSStyleDeclaration;
 
   constructor(private elem: ElementRef) {
-    this.canvas = document.createElement("canvas");
-    this.ctx = this.canvas.getContext("2d")!;
+    if (!FitCounterDirective.canvas) {
+      FitCounterDirective.canvas = document.createElement("canvas");
+    }
+    this.ctx = FitCounterDirective.canvas.getContext("2d")!;
     this.styles = getComputedStyle(elem.nativeElement);
   }
 

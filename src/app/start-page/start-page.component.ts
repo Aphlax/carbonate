@@ -41,10 +41,8 @@ export class StartPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    window.addEventListener('beforeinstallprompt', e => {
-      this.installPrompt = e;
-      e.preventDefault();
-    });
+    window.addEventListener('beforeinstallprompt',
+        e => (this.installPrompt = e) && e.preventDefault());
     window.addEventListener('appinstalled', () => this.installPrompt = undefined);
   }
 

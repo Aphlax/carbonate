@@ -1,4 +1,4 @@
-<button (click)="showShare = true;" class="share-button" mat-icon-button>
+<button mat-icon-button (click)="showShare = true;" class="share-button">
   <icon icon="share"></icon>
 </button>
 <div class="caption">
@@ -17,7 +17,7 @@
   }
 </div>
 <div [class.show]="showShare" class="menu-scrim share">
-  <button (click)="showShare = false;" aria-label="close" mat-icon-button>
+  <button mat-icon-button (click)="showShare = false;" aria-label="close">
     <mat-icon>arrow_back</mat-icon>
   </button>
   <h2 class="menu-title">Share</h2>
@@ -46,5 +46,5 @@
     and select <b>Add&nbsp;to&nbsp;home&nbsp;screen&nbsp;<mat-icon>add_box_outline</mat-icon>
   </b>.
   </p>
-  <button (click)="showInstall = false" mat-stroked-button>Ok</button>
+  <button mat-stroked-button (click)="showInstall = false">Ok</button>
 </div>

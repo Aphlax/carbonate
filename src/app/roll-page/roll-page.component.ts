@@ -46,11 +46,7 @@ function getCircleRadius(t: number, winner: boolean): number {
   selector: 'roll-page',
   host: {'class': 'page'},
   standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    RouterLink,
-  ],
+  imports: [MatButtonModule, MatIconModule, RouterLink],
   templateUrl: './roll-page.component.html',
   styleUrl: './roll-page.component.scss'
 })

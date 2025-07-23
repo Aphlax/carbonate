@@ -1,25 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatButtonModule} from "@angular/material/button";
 import {RouterLink} from "@angular/router";
-import {FormsModule} from "@angular/forms";
 import {COLORS, HASH_SEPARATOR} from "../../lib/constants";
-import {CommonModule} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
 
 @Component({
   selector: 'setup-page',
   host: {'class': 'page'},
   standalone: true,
-  imports: [
-    MatRadioButton,
-    MatRadioGroup,
-    MatButtonModule,
-    MatIconModule,
-    RouterLink,
-    FormsModule,
-    CommonModule,
-  ],
+  imports: [MatButtonModule, MatIconModule, RouterLink],
   templateUrl: './setup-page.component.html',
   styleUrl: './setup-page.component.scss'
 })
